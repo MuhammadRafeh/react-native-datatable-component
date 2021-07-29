@@ -1,0 +1,25 @@
+{
+  "name": "react-native-datatable",
+  "version": "1.0.0",
+  "description": "A React Native datatable component for dynamically perform actions like display, select, delete & so on.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuhammadRafeh/react-native-datatable.git"
+  },
+  "keywords": [
+    "react-native-datatable",
+    "react native datatable",
+    "native datatable",
+    "datatable"
+  ],
+  "author": "Muhammad Rafeh <muhammadrafehatique@outlook.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MuhammadRafeh/react-native-datatable/issues"
+  },
+  "homepage": "https://github.com/MuhammadRafeh/react-native-datatable#readme"
+}
