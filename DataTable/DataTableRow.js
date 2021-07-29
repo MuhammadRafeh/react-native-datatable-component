@@ -2,40 +2,28 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const DataTableRow = props => {
     // props will be name, price and id
-    const { data, getRowSelectedData } = props;
+    const { data, colNames, styles } = props;
     const [checked, setChecked] = useState(false);
-
+    // defaultWidth
     return (
         <>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <Text style={{ color: 'black', fontSize: 15 }} numberOfLines={1}>{data.name}</Text>
-                </View>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={{ color: 'black', textAlign: 'right', fontSize: 14.5 }} numberOfLines={1}>{data.price}</Text>
-                    </View>
-                    <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                        {/* <Text style={{ color: 'black', textAlign: 'right', paddingLeft: 15, fontSize: 14.5 }} numberOfLines={1}>seasdasdasdlect</Text> */}
-                        <Checkbox
-                            status={checked ? 'checked' : 'unchecked'}
-                            onPress={() => {
-                                if (!checked) { //here !checked because to take step according to next state
-                                    getRowSelectedData({ ...data, checked: true });
-                                    setChecked(!checked);
-                                    return
-                                }
-                                getRowSelectedData({ ...data, checked: false })
-                                setChecked(!checked);
-                            }}
-                        />
-                    </View>
-                </View>
+
+            <View style={styles.rowContainer}>
+                {
+                    Object.keys(data).map((item, index) => {
+                        return (
+                            <View key={index} style={{ width: styles.defaultWidth }}>
+                                <Text style={{ color: 'grey', fontSize: 12, textAlign: 'center' }}>{colName}</Text>
+                            </View>
+                        );
+                    })
+                }
             </View>
+
 
             <View style={styles.line} />
         </>
@@ -45,6 +33,9 @@ const DataTableRow = props => {
 export default DataTableRow;
 
 const styles = StyleSheet.create({
+    rowContainer: {
+        flexDirection: 'row'
+    },
     line: {
         height: 1,
         backgroundColor: '#e3e3e3',
