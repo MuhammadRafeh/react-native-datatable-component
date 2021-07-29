@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+
+const {width, height} = Dimensions.get('window');
 
 const DataTableRow = props => {
     // props will be name, price and id
@@ -9,12 +11,11 @@ const DataTableRow = props => {
 
     return (
         <>
-
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={{ flex: 1, marginLeft: 20, justifyContent: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
                     <Text style={{ color: 'black', fontSize: 15 }} numberOfLines={1}>{data.name}</Text>
                 </View>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', marginRight: 20 }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <Text style={{ color: 'black', textAlign: 'right', fontSize: 14.5 }} numberOfLines={1}>{data.price}</Text>
                     </View>
@@ -36,10 +37,21 @@ const DataTableRow = props => {
                 </View>
             </View>
 
-            <View style={{ height: 1, backgroundColor: '#e3e3e3', marginTop: 10, marginBottom: 10 }} />
-
+            <View style={styles.line} />
         </>
     );
 }
 
 export default DataTableRow;
+
+const styles = StyleSheet.create({
+    line: {
+        height: 1,
+        backgroundColor: '#e3e3e3',
+        marginTop: 10,
+        marginBottom: 10,
+        alignSelf: 'center',
+        width
+    }
+});
+
