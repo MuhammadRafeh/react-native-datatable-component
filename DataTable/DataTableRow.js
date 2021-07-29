@@ -6,18 +6,19 @@ const { width, height } = Dimensions.get('window');
 
 const DataTableRow = props => {
     // props will be name, price and id
-    const { data, colNames, styles } = props;
+    const { data, colNames, style } = props;
     const [checked, setChecked] = useState(false);
     // defaultWidth
+    console.log(Object.keys(data), style.defaultWidth)
     return (
         <>
 
             <View style={styles.rowContainer}>
                 {
-                    Object.keys(data).map((item, index) => {
+                    colNames.map((item, index) => {
                         return (
-                            <View key={index} style={{ width: styles.defaultWidth }}>
-                                <Text style={{ color: 'grey', fontSize: 12, textAlign: 'center' }}>{colName}</Text>
+                            <View key={index} style={{ width: style.defaultWidth}}>
+                                <Text style={styles.rowCell}>{data[item]}</Text>
                             </View>
                         );
                     })
@@ -35,6 +36,13 @@ export default DataTableRow;
 const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row'
+        // flexDirection: 'row-reverse'
+    },
+    rowCell: {
+        color: 'black',
+        textAlign: 'left',
+        fontSize: 14.5,
+        textAlign: 'center'
     },
     line: {
         height: 1,

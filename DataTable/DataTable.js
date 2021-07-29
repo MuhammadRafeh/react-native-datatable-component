@@ -12,6 +12,7 @@ export const COL_TYPES = {
     ICON: 'ICON'
 }
 
+
 const MARGIN_HORIZONTAL = 20;
 const MARGIN_TOP = 20;
 const MARGIN_BOTTOM = 5;
@@ -82,7 +83,7 @@ const DataTable = props => {
                     key={index}
                     data={item}
                     colNames={props.colNames}
-                    styles={{defaultWidth: newEachColWidth}}
+                    style={{defaultWidth: newEachColWidth}}
                     getRowSelectedData={getRowSelectedData} />)}
         </View>
     );
