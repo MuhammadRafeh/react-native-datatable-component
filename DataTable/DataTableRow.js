@@ -30,8 +30,8 @@ const DataTableRow = props => {
 
                         }
                         return (
-                            <View key={index} style={{ width: style.defaultWidth }}>
-                                <Text style={[styles.rowCell, { paddingLeft, paddingRight, textAlign }]}>{data[name]}</Text>
+                            <View key={index} style={[styles.rowCellContainer, { width: style.defaultWidth }]}>
+                                <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign }]}>{data[name]}</Text>
                             </View>
                         );
                     })
@@ -49,22 +49,22 @@ export default DataTableRow;
 const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
-        // flexDirection: 'row-reverse'
-        paddingTop: 10,
-        paddingBottom: 10,
         // backgroundColor: 'green'
     },
-    rowCell: {
+    rowCellText: {
         color: 'black',
-        // textAlign: 'left',
         fontSize: 14.5,
-        // textAlign: 'center'
+        // backgroundColor: 'green',
+        
+    },
+    rowCellContainer: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        // backgroundColor: 'green',
     },
     line: {
         height: 1,
         backgroundColor: '#e3e3e3',
-        // marginTop: 10,
-        // marginBottom: 10,
         alignSelf: 'center',
         width
     }

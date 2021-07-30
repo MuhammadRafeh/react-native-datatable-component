@@ -19,39 +19,14 @@ const PADDING_BOTTOM = 10;
 
 const TOTAL_WIDTH = 100; //'100%'
 
-// class DataTable extends React.Component {
 const DataTable = props => {
-    // state = {
-    //     selectedData: []
-    // }
-
-    const [selectedData, setSelectedData] = useState([]);
-    const getRowSelectedData = obj => {
-        if (obj.checked) {
-            //here we add the item
-            const data = [...selectedData, obj]
-            // this.setState({ selectedData: data })
-            setSelectedData(data);
-            props.handleSelectionMenu(data);
-            return
-        } else {
-            //here we want to remove item from data
-            const data = selectedData.filter(item => item.id != obj.id);
-            setSelectedData(data);
-            // this.setState({ selectedData: data })
-            props.handleSelectionMenu(data);
-        }
-    }
-
+    
     const handleColPress = (name) => {
         console.log(name)
     }
 
-    // if (props.noOfCols !== props.colNames.length) throw new Error('noOfCols should equal to colNames Length.')
-
     const noOfCols = props.colNames.length;
-    // const 
-    // const totalWidth = '20%';
+
     const newEachColWidth = TOTAL_WIDTH / noOfCols + '%'; //'23%'
 
     const colTypes = props.colSettings
@@ -62,8 +37,6 @@ const DataTable = props => {
         if (!props.colNames.includes(setting.name)) throw new Error('No Column exists which mentioned in provided colSettings Name!')
         colNameType[setting.name] = setting.type;
     })
-
-    // props.
 
     return (
         <View style={styles.componentContainer}>
@@ -113,7 +86,8 @@ const DataTable = props => {
                     colNameType={colNameType}
                     colNames={props.colNames}
                     style={{ defaultWidth: newEachColWidth }}
-                    getRowSelectedData={getRowSelectedData} />)}
+                    // getRowSelectedData={getRowSelectedData} 
+                    />)}
             <View style={styles.lastRow}>
 
             </View>
@@ -127,9 +101,7 @@ const styles = StyleSheet.create({
     componentContainer: {
         // backgroundColor: 'green',
         paddingHorizontal: PADDING_HORIZONTAL,
-        // paddingTop: PADDING_TOP,
         paddingBottom: PADDING_BOTTOM,
-        // backgroundColor: 'blue'
     },
     headerContainer: {
         flexDirection: 'row',
@@ -153,8 +125,6 @@ const styles = StyleSheet.create({
         height: 0.2,
         backgroundColor: 'grey',
         width,
-        // marginTop: 18,
-        // marginBottom: 10,
         alignSelf: 'center'
     },
     lastRow: {
@@ -166,7 +136,6 @@ const styles = StyleSheet.create({
 
 DataTable.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    // noOfCols: PropTypes.number.isRequired,
     colNames: PropTypes.arrayOf(PropTypes.string).isRequired,
     colSettings: PropTypes.arrayOf(
         PropTypes.shape({
