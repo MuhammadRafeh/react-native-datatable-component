@@ -73,8 +73,10 @@ const DataTable = props => {
                         let paddingRight = 0;
                         if (textAlign == 'left'){
                            paddingLeft = 13     
+                           paddingRight = 1;
                         } else if (textAlign == 'right'){
                             paddingRight = 13;
+                           paddingLeft = 1     
                         }
                         return (
                             <View key={index} style={{ width: newEachColWidth }}>
@@ -115,6 +117,9 @@ const DataTable = props => {
                     colNames={props.colNames}
                     style={{ defaultWidth: newEachColWidth }}
                     getRowSelectedData={getRowSelectedData} />)}
+            <View style={styles.lastRow}>
+                
+            </View>
         </View>
     );
 }
@@ -130,7 +135,9 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 18,
+        // backgroundColor: 'green'
     },
     firstColContainer: {
         width: '20%',
@@ -144,9 +151,14 @@ const styles = StyleSheet.create({
         height: 0.2,
         backgroundColor: 'grey',
         width,
-        marginTop: 18,
-        marginBottom: 10,
+        // marginTop: 18,
+        // marginBottom: 10,
         alignSelf: 'center'
+    },
+    lastRow: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     }
 });
 

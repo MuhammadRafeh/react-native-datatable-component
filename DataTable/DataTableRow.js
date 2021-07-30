@@ -13,22 +13,25 @@ const DataTableRow = props => {
     console.log(Object.keys(data), style.defaultWidth)
     return (
         <>
-    
+
             <View style={styles.rowContainer}>
                 {
                     colNames.map((name, index) => {
-                        const colType = colNameType[name] 
-                        const textAlign = (colType == COL_TYPES.STRING || colType==null) ? 'left': (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center': 'right' 
+                        const colType = colNameType[name]
+                        const textAlign = (colType == COL_TYPES.STRING || colType == null) ? 'left' : (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center' : 'right'
                         let paddingLeft = 0;
                         let paddingRight = 0;
-                        if (textAlign == 'left'){
-                           paddingLeft = 13     
-                        } else if (textAlign == 'right'){
+                        if (textAlign == 'left') {
+                            paddingRight = 1;
+                            paddingLeft = 13
+                        } else if (textAlign == 'right') {
                             paddingRight = 13;
+                            paddingLeft = 1;
+
                         }
                         return (
                             <View key={index} style={{ width: style.defaultWidth }}>
-                                <Text style={[styles.rowCell, {paddingLeft, paddingRight, textAlign}]}>{data[name]}</Text>
+                                <Text style={[styles.rowCell, { paddingLeft, paddingRight, textAlign }]}>{data[name]}</Text>
                             </View>
                         );
                     })
@@ -45,8 +48,11 @@ export default DataTableRow;
 
 const styles = StyleSheet.create({
     rowContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
         // flexDirection: 'row-reverse'
+        paddingTop: 10,
+        paddingBottom: 10,
+        // backgroundColor: 'green'
     },
     rowCell: {
         color: 'black',
@@ -57,8 +63,8 @@ const styles = StyleSheet.create({
     line: {
         height: 1,
         backgroundColor: '#e3e3e3',
-        marginTop: 10,
-        marginBottom: 10,
+        // marginTop: 10,
+        // marginBottom: 10,
         alignSelf: 'center',
         width
     }
