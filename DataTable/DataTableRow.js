@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+import { COL_TYPES } from './DataTable';
 
 const { width, height } = Dimensions.get('window');
 
 const DataTableRow = props => {
     // props will be name, price and id
-    const { data, colNames, style } = props;
+    const { data, colNames, style, colNameType } = props;
     const [checked, setChecked] = useState(false);
     // defaultWidth
     console.log(Object.keys(data), style.defaultWidth)
     return (
         <>
-
+    
             <View style={styles.rowContainer}>
                 {
-                    colNames.map((item, index) => {
+                    colNames.map((name, index) => {
+                        const colType = colNameType[name] 
+                        const textAlign = colType == COL_TYPES.STRING ? 'left': (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center': 'right' 
+                        let paddingLeft = 0;
+                        let paddingRight = 0;
+                        if (textAlign == 'left'){
+                           paddingLeft = 13     
+                        } else if (textAlign == 'right'){
+                            paddingRight = 13;
+                        }
                         return (
-                            <View key={index} style={{ width: style.defaultWidth}}>
-                                <Text style={styles.rowCell}>{data[item]}</Text>
+                            <View key={index} style={{ width: style.defaultWidth }}>
+                                <Text style={[styles.rowCell, {paddingLeft, paddingRight, textAlign}]}>{data[name]}</Text>
                             </View>
                         );
                     })
@@ -40,9 +50,9 @@ const styles = StyleSheet.create({
     },
     rowCell: {
         color: 'black',
-        textAlign: 'left',
+        // textAlign: 'left',
         fontSize: 14.5,
-        textAlign: 'center'
+        // textAlign: 'center'
     },
     line: {
         height: 1,

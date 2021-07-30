@@ -24,7 +24,7 @@ const DataTable = props => {
     // state = {
     //     selectedData: []
     // }
-   
+
     const [selectedData, setSelectedData] = useState([]);
     const getRowSelectedData = obj => {
         if (obj.checked) {
@@ -44,11 +44,22 @@ const DataTable = props => {
     }
 
     // if (props.noOfCols !== props.colNames.length) throw new Error('noOfCols should equal to colNames Length.')
-    
+
     const noOfCols = props.colNames.length;
-    
+    // const 
     // const totalWidth = '20%';
     const newEachColWidth = TOTAL_WIDTH / noOfCols + '%'; //'23%'
+
+    const colTypes = props.colSettings
+
+    const colNameType = {}
+
+    props.colSettings.forEach(setting => {
+        if (!props.colNames.includes(setting.name)) throw new Error('No Column exists which mentioned in provided colSettings Name!')
+        colNameType[setting.name] = setting.type;
+    })
+
+    // props.
 
     return (
         <View style={styles.componentContainer}>
@@ -56,9 +67,27 @@ const DataTable = props => {
             <View style={styles.headerContainer}>
                 {
                     props.colNames.map((colName, index) => {
+                        const colType = colNameType[colName] 
+                        const textAlign = (colType == COL_TYPES.STRING || colType==null) ? 'left': (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center': 'right' 
+                        let paddingLeft = 0;
+                        let paddingRight = 0;
+                        if (textAlign == 'left'){
+                           paddingLeft = 13     
+                        } else if (textAlign == 'right'){
+                            paddingRight = 13;
+                        }
                         return (
-                            <View key={index} style={{ width: newEachColWidth}}>
-                                <Text style={{ color: 'grey', fontSize: 12, textAlign: 'center' }}>{colName}</Text>
+                            <View key={index} style={{ width: newEachColWidth }}>
+                                <Text
+                                    style={{
+                                        color: 'grey',
+                                        fontSize: 12,
+                                        textAlign,
+                                        paddingLeft,
+                                        paddingRight
+                                    }}>
+                                    {colName}
+                                    </Text>
                             </View>
                         );
                     })
@@ -82,8 +111,9 @@ const DataTable = props => {
                 props.data.map((item, index) => <DataTableRow
                     key={index}
                     data={item}
+                    colNameType={colNameType}
                     colNames={props.colNames}
-                    style={{defaultWidth: newEachColWidth}}
+                    style={{ defaultWidth: newEachColWidth }}
                     getRowSelectedData={getRowSelectedData} />)}
         </View>
     );
