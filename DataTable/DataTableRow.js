@@ -18,7 +18,7 @@ const DataTableRow = props => {
                 {
                     colNames.map((name, index) => {
                         const colType = colNameType[name] 
-                        const textAlign = colType == COL_TYPES.STRING ? 'left': (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center': 'right' 
+                        const textAlign = (colType == COL_TYPES.STRING || colType==null) ? 'left': (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center': 'right' 
                         let paddingLeft = 0;
                         let paddingRight = 0;
                         if (textAlign == 'left'){
