@@ -97,7 +97,6 @@ class DataTable extends React.Component {
             })
 
             return {
-                // data: this.props.data.map(rowData => ({...rowData, isAssendingSorted: false})),
                 data: [...this.props.data],
                 colNames: [...this.props.colNames],
                 defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
@@ -119,29 +118,28 @@ class DataTable extends React.Component {
                     {
                         this.state.colNames.map((colName, index) => {
                             const colType = this.colNameType[colName]
-                            const textAlign = (colType == COL_TYPES.STRING || colType == null) ? 'left' : (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center' : 'right'
+                            const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
                             let paddingLeft = 0;
                             let paddingRight = 0;
-                            if (textAlign == 'left') {
+                            if (justifyContent == 'flex-start') {
                                 paddingLeft = 13
                                 paddingRight = 1;
-                            } else if (textAlign == 'right') {
+                            } else if (justifyContent == 'flex-end') {
                                 paddingRight = 13;
                                 paddingLeft = 1
                             }
                             return (
 
-                                <TouchableOpacity key={index} style={[styles.headerRow, { width: this.state.defaultEachColumnWidth }]} onPress={this.handleColPress.bind(null, colName)}>
+                                <TouchableOpacity key={index} style={[styles.headerRow, { width: this.state.defaultEachColumnWidth, justifyContent }]} onPress={this.handleColPress.bind(null, colName)}>
+                                    <Text style={{ paddingLeft }}>
+                                        <Image source={require('../assets/doubleArrow.png')} />
+                                    </Text>
                                     <Text
                                         style={{
                                             color: 'grey',
                                             fontSize: 12,
-                                            textAlign,
-                                            paddingLeft,
-                                            paddingRight
+                                            paddingRight,
                                         }}>
-                                        <Image source={require('../assets/doubleArrow.png')} />
-
                                         {' ' + colName}
                                     </Text>
                                 </TouchableOpacity>
@@ -187,6 +185,9 @@ const styles = StyleSheet.create({
     headerRow: {
         paddingTop: PADDING_TOP,
         paddingBottom: 18,
+        flexDirection: 'row',
+        alignItems: 'center',
+        // justifyContent: 'space-around'
         // backgroundColor: 'green'
     },
     firstColContainer: {
