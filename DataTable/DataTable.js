@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Image, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import DataTableRow from './DataTableRow';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,7 @@ export const COL_TYPES = {
 }
 
 
-const PADDING_HORIZONTAL = 20;
+const PADDING_HORIZONTAL = 15;
 const PADDING_TOP = 20;
 const PADDING_BOTTOM = 10;
 
@@ -41,6 +41,10 @@ const DataTable = props => {
             // this.setState({ selectedData: data })
             props.handleSelectionMenu(data);
         }
+    }
+
+    const handleColPress = (name) => {
+        console.log(name)
     }
 
     // if (props.noOfCols !== props.colNames.length) throw new Error('noOfCols should equal to colNames Length.')
@@ -79,7 +83,8 @@ const DataTable = props => {
                             paddingLeft = 1
                         }
                         return (
-                            <View key={index} style={[styles.headerRow, { width: newEachColWidth }]}>
+
+                            <TouchableOpacity key={index} style={[styles.headerRow, { width: newEachColWidth }]} onPress={handleColPress.bind(null, colName)}>
                                 <Text
                                     style={{
                                         color: 'grey',
@@ -90,9 +95,9 @@ const DataTable = props => {
                                     }}>
                                     <Image source={require('../assets/arrow2.png')} />
 
-                                    {' '+colName}
+                                    {' ' + colName}
                                 </Text>
-                            </View>
+                            </TouchableOpacity>
                         );
                     })
                 }
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
     componentContainer: {
         // backgroundColor: 'green',
         paddingHorizontal: PADDING_HORIZONTAL,
-        paddingTop: PADDING_TOP,
+        // paddingTop: PADDING_TOP,
         paddingBottom: PADDING_BOTTOM,
         // backgroundColor: 'blue'
     },
@@ -132,6 +137,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'green'
     },
     headerRow: {
+        paddingTop: PADDING_TOP,
         paddingBottom: 18,
         // backgroundColor: 'green'
     },
@@ -162,7 +168,7 @@ DataTable.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
     // noOfCols: PropTypes.number.isRequired,
     colNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-    colSettings: PropTypes.arrayOf(PropTypes.objectOf(
+    colSettings: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,//Col Name
             type: PropTypes.string, //radio ||  int || string || icon
@@ -170,6 +176,6 @@ DataTable.propTypes = {
             showFullText: PropTypes.bool, //tranc || adjustSizeToFit
             noOfLines: PropTypes.number
         })
-    )),
+    ),
     showNoOfRowsAtATime: PropTypes.number //default all
 }
