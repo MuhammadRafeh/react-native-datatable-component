@@ -25,12 +25,61 @@ class DataTable extends React.Component {
         colNames: [],//['ad', 'asd', ...]
         defaultEachColumnWidth: '50%',
         noOfCols: 0, //default 2, set 0 because of fast rendering at start
-        widthOfContainer: width
+        widthOfContainer: width,
+        isSortedAssending: { recentlySortedCol: null } //ColName: true||false
     }
 
-    handleColPress = (name) => {
-        console.log(name)
-        this.state.data
+    sortData = (data, colName, sortAssending = false) => {// colName = name Of Col
+        const isSortAssending = this.state.isSortedAssending[colName];
+        let setIsSortedAsc = false;
+        if (sortAssending || !isSortAssending) { //here sorting Asc
+            // console.log('asc')
+            data.sort(function (a, b) {
+                if (a[colName] > b[colName]) {
+                    return 1;
+                }
+                if (b[colName] > a[colName]) {
+                    return -1;
+                }
+                return 0;
+            });
+            setIsSortedAsc = true;
+        } else if (isSortAssending) { //here sorting Desc
+            // console.log('desc')
+            data.sort(function (a, b) {
+                if (a[colName] > b[colName]) {
+                    return -1;
+                }
+                if (b[colName] > a[colName]) {
+                    return 1;
+                }
+                return 0;
+            });
+        }
+
+        this.setState(state => ({
+            data,
+            isSortedAssending: {
+                ...state.isSortedAssending,
+                [colName]: setIsSortedAsc,
+                recentlySortedCol: colName
+            }
+        }))
+
+    }
+
+    handleColPress = name => {
+        const newData = [...this.state.data];
+
+        if (this.state.isSortedAssending.recentlySortedCol == name) {
+            // Here we want to sort based on previus col State
+            this.sortData(newData, name)
+        } else {
+            // Here we want to sort always in ascending Order
+            this.sortData(newData, name, true)
+        }
+
+        // this.setState({data: newData})
     }
 
     componentDidMount() {
@@ -42,22 +91,29 @@ class DataTable extends React.Component {
         })
         this.setState((state) => {
             const noOfCols = this.props.colNames.length;
+            const isSortedAssending = {};
+            this.props.colNames.forEach(name => {
+                isSortedAssending[name] = false;
+            })
+
             return {
+                // data: this.props.data.map(rowData => ({...rowData, isAssendingSorted: false})),
                 data: [...this.props.data],
                 colNames: [...this.props.colNames],
                 defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
-                noOfCols: noOfCols
+                noOfCols: noOfCols,
+                isSortedAssending: { ...state.isSortedAssending, ...isSortedAssending }
             }
         });
     }
 
     render() {
-        console.log(this.state.noOfCols)
+        // console.log(this.state.isSortedAssending)
         return (
-            <View style={styles.componentContainer} 
-            onLayout={e => {
-                this.setState({widthOfContainer: e.nativeEvent.layout.width})
-            }}>
+            <View style={styles.componentContainer}
+                onLayout={e => {
+                    this.setState({ widthOfContainer: e.nativeEvent.layout.width })
+                }}>
 
                 <View style={styles.headerContainer}>
                     {
@@ -95,7 +151,7 @@ class DataTable extends React.Component {
 
                 </View>
 
-                <View style={[styles.line, {width: this.state.widthOfContainer}]} />
+                <View style={[styles.line, { width: this.state.widthOfContainer }]} />
 
                 {this.state.data &&
                     this.state.data.map((item, index) => <DataTableRow

@@ -10,7 +10,7 @@ const DataTableRow = props => {
     const { data, colNames, style, colNameType, widthOfLine } = props;
     const [checked, setChecked] = useState(false);
     // defaultWidth
-    console.log(Object.keys(data), style.defaultWidth)
+    // console.log(Object.keys(data), style.defaultWidth)
     return (
         <>
 
