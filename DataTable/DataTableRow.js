@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window');
 
 const DataTableRow = props => {
     // props will be name, price and id
-    const { data, colNames, style, colNameType } = props;
+    const { data, colNames, style, colNameType, widthOfLine } = props;
     const [checked, setChecked] = useState(false);
     // defaultWidth
     console.log(Object.keys(data), style.defaultWidth)
@@ -39,7 +39,7 @@ const DataTableRow = props => {
             </View>
 
 
-            <View style={styles.line} />
+            <View style={[styles.line, {width: widthOfLine}]} />
         </>
     );
 }
