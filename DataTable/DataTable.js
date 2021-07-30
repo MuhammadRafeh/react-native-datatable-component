@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, Image, StyleSheet, Dimensions } from 'react-native';
 import DataTableRow from './DataTableRow';
 import PropTypes from 'prop-types';
 
@@ -13,9 +13,9 @@ export const COL_TYPES = {
 }
 
 
-const MARGIN_HORIZONTAL = 20;
-const MARGIN_TOP = 20;
-const MARGIN_BOTTOM = 5;
+const PADDING_HORIZONTAL = 20;
+const PADDING_TOP = 20;
+const PADDING_BOTTOM = 10;
 
 const TOTAL_WIDTH = 100; //'100%'
 
@@ -67,19 +67,19 @@ const DataTable = props => {
             <View style={styles.headerContainer}>
                 {
                     props.colNames.map((colName, index) => {
-                        const colType = colNameType[colName] 
-                        const textAlign = (colType == COL_TYPES.STRING || colType==null) ? 'left': (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center': 'right' 
+                        const colType = colNameType[colName]
+                        const textAlign = (colType == COL_TYPES.STRING || colType == null) ? 'left' : (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center' : 'right'
                         let paddingLeft = 0;
                         let paddingRight = 0;
-                        if (textAlign == 'left'){
-                           paddingLeft = 13     
-                           paddingRight = 1;
-                        } else if (textAlign == 'right'){
+                        if (textAlign == 'left') {
+                            paddingLeft = 13
+                            paddingRight = 1;
+                        } else if (textAlign == 'right') {
                             paddingRight = 13;
-                           paddingLeft = 1     
+                            paddingLeft = 1
                         }
                         return (
-                            <View key={index} style={{ width: newEachColWidth }}>
+                            <View key={index} style={[styles.headerRow, { width: newEachColWidth }]}>
                                 <Text
                                     style={{
                                         color: 'grey',
@@ -88,22 +88,14 @@ const DataTable = props => {
                                         paddingLeft,
                                         paddingRight
                                     }}>
-                                    {colName}
-                                    </Text>
+                                    <Image source={require('../assets/arrow2.png')} />
+
+                                    {' '+colName}
+                                </Text>
                             </View>
                         );
                     })
                 }
-                {/* <View style={styles.firstColContainer}>
-                    <Text style={styles.firstColLabel}>Name</Text>
-                </View>
-
-                <View style={{ width: '20%' }}>
-                    <Text style={{ color: 'grey', fontSize: 12, textAlign: 'right' }}>Price</Text>
-                </View>
-                <View style={{ width: '30%' }}>
-                    <Text style={{ color: 'grey', fontSize: 12, textAlign: 'right', paddingLeft: 15, paddingRight: 4 }}>Select</Text>
-                </View> */}
 
             </View>
 
@@ -118,7 +110,7 @@ const DataTable = props => {
                     style={{ defaultWidth: newEachColWidth }}
                     getRowSelectedData={getRowSelectedData} />)}
             <View style={styles.lastRow}>
-                
+
             </View>
         </View>
     );
@@ -129,13 +121,17 @@ export default DataTable;
 const styles = StyleSheet.create({
     componentContainer: {
         // backgroundColor: 'green',
-        marginHorizontal: MARGIN_HORIZONTAL,
-        marginTop: MARGIN_TOP,
-        marginBottom: MARGIN_BOTTOM
+        paddingHorizontal: PADDING_HORIZONTAL,
+        paddingTop: PADDING_TOP,
+        paddingBottom: PADDING_BOTTOM,
+        // backgroundColor: 'blue'
     },
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        // backgroundColor: 'green'
+    },
+    headerRow: {
         paddingBottom: 18,
         // backgroundColor: 'green'
     },
