@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
+const LAST_ROW_HEIGHT = 40;
+
 const DataTableFooter = () => {
     return (
         <View style={styles.lastRow}>
@@ -10,12 +12,12 @@ const DataTableFooter = () => {
 
             <TouchableOpacity>
                 <View style={styles.lessThan}>
-                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={{ height: 40 / 2 }} />
+                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={{ height: LAST_ROW_HEIGHT / 2 }} />
                 </View>
             </TouchableOpacity>
             <TouchableOpacity>
                 <View style={styles.greaterThan}>
-                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={{ height: 40 / 2 }} />
+                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={{ height: LAST_ROW_HEIGHT / 2 }} />
                 </View>
             </TouchableOpacity>
         </View>
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        height: 40,
+        height: LAST_ROW_HEIGHT,
         // backgroundColor: 'green'
         // paddingBottom: PADDING_BOTTOM,
         // marginRight: 7

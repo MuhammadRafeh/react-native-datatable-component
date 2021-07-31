@@ -4,6 +4,7 @@ import DataTableRow from './DataTableRow';
 import PropTypes from 'prop-types';
 import DataTableFooter from './DataTableFooter';
 import DataTableHeader from './DataTableHeader';
+import Line from './Line';
 
 const { width, height } = Dimensions.get('window');
 
@@ -113,9 +114,7 @@ class DataTable extends React.Component {
     }
 
     render() {
-        // console.log(this.state.isSortedAssending)
-        const a = 'a';
-        // a.
+        
         return (
             <View style={styles.componentContainer}
                 onLayout={e => {
@@ -129,24 +128,19 @@ class DataTable extends React.Component {
                     handleColPress={this.handleColPress}
                 />
 
-                <View style={[styles.line, { width: this.state.widthOfContainer }]} />
+                <Line width={this.state.widthOfContainer} header />
 
                 {this.state.data &&
-                    this.state.data.map((item, index) => <>
+                    this.state.data.map((item, index) => (
                         <DataTableRow
+                            widthOfLine={this.state.widthOfContainer}
                             key={index}
                             data={item}
                             mapColNameToType={this.mapColNameToType}
                             colNames={this.state.colNames}
                             style={{ defaultEachColumnWidth: this.state.defaultEachColumnWidth }}
                         />
-                        <View style={[styles.line, {
-                            width: this.state.widthOfContainer,
-                            height: 1,
-                            backgroundColor: '#e3e3e3',
-                        }]} />
-                    </>
-                    )
+                    ))
                 }
 
                 <DataTableFooter />
@@ -162,12 +156,6 @@ const styles = StyleSheet.create({
     componentContainer: {
         backgroundColor: '#e4edec',
         paddingHorizontal: PADDING_HORIZONTAL,
-    },
-    line: {
-        height: 0.2,
-        backgroundColor: 'grey',
-        width,
-        alignSelf: 'center'
     }
 });
 

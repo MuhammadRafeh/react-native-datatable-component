@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { COL_TYPES } from './DataTable';
+import Line from './Line';
 
 const { width, height } = Dimensions.get('window');
 
 const DataTableRow = props => {
-    // props will be name, price and id
-    const { data, colNames, style, mapColNameToType } = props;
+
+    const { data, colNames, style, mapColNameToType, widthOfLine } = props;
     const [checked, setChecked] = useState(false);
-    // defaultWidth
-    // console.log(Object.keys(data), style.defaultWidth)
+
     return (
         <>
 
@@ -37,7 +37,8 @@ const DataTableRow = props => {
                     })
                 }
             </View>
-
+            
+            <Line row width={widthOfLine} />
 
         </>
     );
