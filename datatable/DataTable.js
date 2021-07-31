@@ -87,7 +87,7 @@ class DataTable extends React.Component {
         let end = []
         // console.log( 'asd',this.props.data.length)
         if (this.props.data.length != 0) {
-            const progress = showCurrentProgress(4, this.props.data?.length) //[{id, endData}]
+            const progress = showCurrentProgress(this.props?.noOfPages, this.props.data?.length) //[{id, endData}]
             if (progress){
                 start = progress.start;
                 end = progress.end;

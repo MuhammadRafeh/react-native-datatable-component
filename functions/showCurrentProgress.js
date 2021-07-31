@@ -18,21 +18,32 @@ const showCurrentProgress = (numOfPages = 3, fullLengthOfData) => { //default is
         isShowStartLabel = false;
     }
 
+    if (!isShowStartLabel){
+        const endDisplayData = []
+        for (let i=0; i < fullLengthOfData;i++){
+            endDisplayData.push({id: i, endData: i + 1})
+        }
+        return {
+            end: endDisplayData,
+            start: []
+        }
+    }
+
     const endDisplayData = []; //[{id: number, endData: number}]
     const startDisplayData = []; //[{id: number, startData: number}]
     const floorData = Math.floor(noOfDataPerDisplay);
     const ceilData = Math.ceil(noOfDataPerDisplay)
     if (floorData !== ceilData || floorData === ceilData) { //It's mean data is not equally distributed Among numOfPages
         let number = 0;
-
+        console.log("floor", floorData,"ceil", ceilData)
         for (let i = 0; i < numOfPages; i++) {
             let isCeilWasAdded = false;
             if ((numOfPages - 1) != i) { //It's mean it's not the last Loop
                 number += floorData;
                 endDisplayData.push({ id: i, endData: number });
             } else { //here it's the last loop
+                endDisplayData.push({ id: i, endData: number + floorData + (fullLengthOfData % numOfPages) });
                 number += ceilData;
-                endDisplayData.push({ id: i, endData: number });
                 isCeilWasAdded = true;
             }
             if (isShowStartLabel && !isCeilWasAdded) { //all loops
@@ -42,8 +53,7 @@ const showCurrentProgress = (numOfPages = 3, fullLengthOfData) => { //default is
             }
         }
 
-
-    }
+    } 
     // else {
     //     for (let i = 0; i < numOfPages; i++) {//Here It's mean data is equally distributed Among numOfPages
     //         endDisplayData.push({ id: i, endData: ceilData });//Here ceilData = floorData
