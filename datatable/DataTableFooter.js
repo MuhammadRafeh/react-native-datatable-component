@@ -21,14 +21,14 @@ const DataTableFooter = props => {
                 <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>{startObj?.startData}-{endObj?.endData} of {dataLength}</Text>
             </View>
 
-            <TouchableOpacity>
+            <TouchableOpacity disabled={startObj?.startData == 1 ? true: false}>
                 <View style={styles.lessThan}>
-                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={styles.iconStyle} />
+                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: startObj?.startData == 1 ? 0.5: 1}]} />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity disabled={endObj?.endData == dataLength ? true: false}>
                 <View style={styles.greaterThan}>
-                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={styles.iconStyle} />
+                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: endObj?.endData == dataLength ? 0.5: 1}]} />
                 </View>
             </TouchableOpacity>
         </View>

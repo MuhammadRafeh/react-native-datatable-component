@@ -73,7 +73,10 @@ class DataTable extends React.Component {
                 }
             }))
         }
+    }
 
+    handleNextPreviousPagePress = () => {
+        
     }
 
     componentDidMount() {
