@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window');
 
 const DataTableRow = props => {
     // props will be name, price and id
-    const { data, colNames, style, colNameType, widthOfLine } = props;
+    const { data, colNames, style, mapColNameToType } = props;
     const [checked, setChecked] = useState(false);
     // defaultWidth
     // console.log(Object.keys(data), style.defaultWidth)
@@ -17,7 +17,7 @@ const DataTableRow = props => {
             <View style={styles.rowContainer}>
                 {
                     colNames.map((name, index) => {
-                        const colType = colNameType[name]
+                        const colType = mapColNameToType[name]
                         const textAlign = (colType == COL_TYPES.STRING || colType == null) ? 'left' : (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center' : 'right'
                         let paddingLeft = 0;
                         let paddingRight = 0;
@@ -30,7 +30,7 @@ const DataTableRow = props => {
 
                         }
                         return (
-                            <View key={index} style={[styles.rowCellContainer, { width: style.defaultWidth }]}>
+                            <View key={index} style={[styles.rowCellContainer, { width: style.defaultEachColumnWidth }]}>
                                 <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign }]}>{data[name]}</Text>
                             </View>
                         );
@@ -39,7 +39,6 @@ const DataTableRow = props => {
             </View>
 
 
-            <View style={[styles.line, {width: widthOfLine}]} />
         </>
     );
 }
@@ -63,11 +62,11 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         // backgroundColor: 'green',
     },
-    line: {
-        height: 1,
-        backgroundColor: '#e3e3e3',
-        alignSelf: 'center',
-        width
-    }
+    // line: {
+    //     height: 1,
+    //     backgroundColor: '#e3e3e3',
+    //     alignSelf: 'center',
+    //     width
+    // }
 });
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Text, View, Image, StyleSheet, Dimensions, Platform, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 import DataTableRow from './DataTableRow';
 import PropTypes from 'prop-types';
+import DataTableFooter from './DataTableFooter';
+import DataTableHeader from './DataTableHeader';
 
 const { width, height } = Dimensions.get('window');
 
@@ -12,7 +14,7 @@ export const COL_TYPES = {
     ICON: 'ICON'
 }
 
-let TouchableComponent = TouchableOpacity
+// let TouchableComponent = TouchableOpacity
 
 // if (Platform.OS == 'android' && Platform.Version >= 21) {
 //     TouchableComponent = TouchableNativeFeedback
@@ -20,8 +22,6 @@ let TouchableComponent = TouchableOpacity
 
 
 const PADDING_HORIZONTAL = 10;
-const PADDING_TOP = 20;
-const PADDING_BOTTOM = 15;
 
 const TOTAL_WIDTH = 100; //'100%'
 
@@ -90,10 +90,10 @@ class DataTable extends React.Component {
 
     componentDidMount() {
         this.colTypes = this.props.colSettings;
-        this.colNameType = {}
+        this.mapColNameToType = {}
         this.props.colSettings.forEach(setting => {
             if (!this.props.colNames.includes(setting.name)) throw new Error('No Column exists which mentioned in provided colSettings Name!')
-            this.colNameType[setting.name] = setting.type;
+            this.mapColNameToType[setting.name] = setting.type;
         })
         this.setState((state) => {
             const noOfCols = this.props.colNames.length;
@@ -122,73 +122,35 @@ class DataTable extends React.Component {
                     this.setState({ widthOfContainer: e.nativeEvent.layout.width })
                 }}>
 
-                <View style={styles.headerContainer}>
-                    {
-                        this.state.colNames.map((colName, index) => {
-                            const colType = this.colNameType[colName]
-                            const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
-                            let paddingLeft = 0;
-                            let paddingRight = 0;
-                            if (justifyContent == 'flex-start') {
-                                paddingLeft = 13
-                                paddingRight = 1;
-                            } else if (justifyContent == 'flex-end') {
-                                paddingRight = 13;
-                                paddingLeft = 1
-                            }
-                            return (
-
-                                <TouchableOpacity key={index} style={[styles.headerRow, { width: this.state.defaultEachColumnWidth, justifyContent }]} onPress={this.handleColPress.bind(null, colName)}>
-                                    <View style={{ paddingLeft }}>
-                                        <Image source={require('../assets/doubleArrow.png')} />
-                                    </View>
-                                    <View style={{}}>
-                                        <Text
-                                            style={{
-                                                color: 'grey',
-                                                fontSize: 12,
-                                                paddingRight
-                                                // width: '100%'
-                                                // backgroundColor: 'green'
-                                            }}
-                                        >
-                                            {' ' + colName[0].toUpperCase() + colName.substring(1)}
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            );
-                        })
-                    }
-
-                </View>
+                <DataTableHeader
+                    colNames={this.state.colNames}
+                    mapColNameToType={this.mapColNameToType}
+                    defaultEachColumnWidth={this.state.defaultEachColumnWidth}
+                    handleColPress={this.handleColPress}
+                />
 
                 <View style={[styles.line, { width: this.state.widthOfContainer }]} />
 
                 {this.state.data &&
-                    this.state.data.map((item, index) => <DataTableRow
-                        widthOfLine={this.state.widthOfContainer}
-                        key={index}
-                        data={item}
-                        colNameType={this.colNameType}
-                        colNames={this.state.colNames}
-                        style={{ defaultWidth: this.state.defaultEachColumnWidth }}
-                    />)}
-                <View style={styles.lastRow}>
-                    <View style={styles.noOfPages}>
-                        <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>1-2 of 6</Text>
-                    </View>
+                    this.state.data.map((item, index) => <>
+                        <DataTableRow
+                            key={index}
+                            data={item}
+                            mapColNameToType={this.mapColNameToType}
+                            colNames={this.state.colNames}
+                            style={{ defaultEachColumnWidth: this.state.defaultEachColumnWidth }}
+                        />
+                        <View style={[styles.line, {
+                            width: this.state.widthOfContainer,
+                            height: 1,
+                            backgroundColor: '#e3e3e3',
+                        }]} />
+                    </>
+                    )
+                }
 
-                    <TouchableComponent>
-                        <View style={styles.lessThan}>
-                            <Image source={require('../assets/lessThan.png')} />
-                        </View>
-                    </TouchableComponent>
-                    <TouchableComponent>
-                        <View style={styles.greaterThan}>
-                            <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={{ height: 40 / 2 }} />
-                        </View>
-                    </TouchableComponent>
-                </View>
+                <DataTableFooter />
+
             </View>
         );
     }
@@ -201,77 +163,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#e4edec',
         paddingHorizontal: PADDING_HORIZONTAL,
     },
-    headerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: 'green'
-    },
-    headerRow: {
-        paddingTop: PADDING_TOP,
-        paddingBottom: 18,
-        flexDirection: 'row',
-        alignItems: 'center',
-        // flexWrap:'wrap'
-        // justifyContent: 'space-around'
-        // backgroundColor: 'green',
-        height: '100%'
-    },
-    firstColContainer: {
-        width: '20%',
-        // backgroundColor: 'green'
-    },
-    firstColLabel: {
-        color: 'grey',
-        fontSize: 12
-    },
     line: {
         height: 0.2,
         backgroundColor: 'grey',
         width,
         alignSelf: 'center'
-    },
-    lastRow: {
-        // marginTop: 10,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        height: 40,
-        // backgroundColor: 'green'
-        // paddingBottom: PADDING_BOTTOM,
-        // marginRight: 7
-    },
-    greaterThan: {
-        paddingRight: 7,
-        paddingLeft: 14.5,
-        // paddingTop: 13,
-        // paddingBottom: PADDING_BOTTOM,
-        justifyContent: 'center',
-        // alignItems: 'flex-end',
-        height: '100%',
-        // backgroundColor: 'green'
-    },
-    lessThan: {
-        paddingLeft: 14.5,
-        // paddingTop: 13,
-        // paddingBottom: PADDING_BOTTOM,
-        paddingRight: 14.5,
-        justifyContent: 'center',
-        height: '100%',
-        // backgroundColor: '#414a4c',
-    },
-    noOfPages: {
-        paddingLeft: 14.5,
-        // paddingTop: 12,
-        // paddingBottom: PADDING_BOTTOM,
-        paddingRight: 14.5,
-        justifyContent: 'center'
-        // height: 40,
-        // backgroundColor: '#414a4c',
-
-    },
-    noOfPagesLabel: {
-        color: 'grey',
-        fontSize: 12
     }
 });
 
