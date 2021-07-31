@@ -5,7 +5,7 @@ const LAST_ROW_HEIGHT = 40;
 
 const DataTableFooter = props => {
 
-    const {start, end, activeDataId, dataLength} = props    
+    const {start, end, activeDataId, dataLength, handleNextPreviousPagePress} = props    
     
     console.log(start, end, activeDataId, dataLength)
 
@@ -21,12 +21,12 @@ const DataTableFooter = props => {
                 <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>{startObj?.startData}-{endObj?.endData} of {dataLength}</Text>
             </View>
 
-            <TouchableOpacity disabled={startObj?.startData == 1 ? true: false}>
+            <TouchableOpacity disabled={startObj?.startData == 1 ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'back')}>
                 <View style={styles.lessThan}>
                     <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: startObj?.startData == 1 ? 0.5: 1}]} />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity disabled={endObj?.endData == dataLength ? true: false}>
+            <TouchableOpacity disabled={endObj?.endData == dataLength ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'next')}>
                 <View style={styles.greaterThan}>
                     <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: endObj?.endData == dataLength ? 0.5: 1}]} />
                 </View>

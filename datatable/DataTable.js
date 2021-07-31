@@ -38,7 +38,7 @@ class DataTable extends React.Component {
         // noOfCols: 0, //default 2, set 0 because of fast rendering at start
         widthOfContainer: width,
         isSortedAssending: { recentlySortedCol: null }, //ColName: true||false
-        startArrayData: [],//[{id: startData}]
+        startDataArray: [],//[{id: startData}]
         endDataArray: [], //[{id, endData}]
         noOfPages: 3, //default
         activeDisplayDataId: 0
@@ -75,8 +75,28 @@ class DataTable extends React.Component {
         }
     }
 
-    handleNextPreviousPagePress = () => {
-        
+    handleNextPreviousPagePress = (type) => {//next | back
+        if (type == 'next') {
+            // this.state.activeDisplayDataId
+            const activeDisplayId = this.state.activeDisplayDataId;
+            const endObj = this.state.endDataArray.find(obj => obj.id == activeDisplayId + 1);
+            const startObj = this.state.startDataArray.find(obj => obj.id == activeDisplayId + 1);
+
+            this.setState({
+                displayData: this.state.data.slice(startObj.startData - 1, endObj.endData),
+                activeDisplayDataId: activeDisplayId + 1
+            });
+
+        } else if (type == 'back') {
+            const activeDisplayId = this.state.activeDisplayDataId;
+            const endObj = this.state.endDataArray.find(obj => obj.id == activeDisplayId - 1);
+            const startObj = this.state.startDataArray.find(obj => obj.id == activeDisplayId - 1);
+
+            this.setState({
+                displayData: this.state.data.slice(startObj.startData - 1, endObj.endData),
+                activeDisplayDataId: activeDisplayId - 1
+            });
+        }
     }
 
     componentDidMount() {
@@ -91,7 +111,7 @@ class DataTable extends React.Component {
         // console.log( 'asd',this.props.data.length)
         if (this.props.data.length != 0) {
             const progress = showCurrentProgress(this.props?.noOfPages, this.props.data?.length) //[{id, endData}]
-            if (progress){
+            if (progress) {
                 start = progress.start;
                 end = progress.end;
             }
@@ -103,16 +123,16 @@ class DataTable extends React.Component {
                 isSortedAssending[name] = false;
             })
 
-
             const cloneData = [...this.props.data];
+
             return {
                 data: cloneData,
-                displayData: cloneData,
+                displayData: cloneData.slice(0, end[0]['endData']),
                 colNames: [...this.props.colNames],
                 defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
                 isSortedAssending: { ...state.isSortedAssending, ...isSortedAssending },
                 activeDisplayDataId: 0, //by default it's zero
-                startArrayData: start,
+                startDataArray: start,
                 endDataArray: end
             }
         });
@@ -149,11 +169,12 @@ class DataTable extends React.Component {
                     ))
                 }
 
-                <DataTableFooter 
-                    start={this.state.startArrayData}
+                <DataTableFooter
+                    start={this.state.startDataArray}
                     end={this.state.endDataArray}
                     activeDataId={this.state.activeDisplayDataId}
                     dataLength={this.state.data.length}
+                    handleNextPreviousPagePress={this.handleNextPreviousPagePress}
                 />
 
             </View>
