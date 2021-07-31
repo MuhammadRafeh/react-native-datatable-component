@@ -142,17 +142,16 @@ class DataTable extends React.Component {
                                     <View style={{ paddingLeft }}>
                                         <Image source={require('../assets/doubleArrow.png')} />
                                     </View>
-                                    <View>
+                                    <View style={{}}>
                                         <Text
                                             style={{
                                                 color: 'grey',
                                                 fontSize: 12,
-                                                paddingRight,
+                                                paddingRight
+                                                // width: '100%'
                                                 // backgroundColor: 'green'
                                             }}
-                                            numberOfLines={1}
-                                            adjustsFontSizeToFit={true}
-                                            >
+                                        >
                                             {' ' + colName[0].toUpperCase() + colName.substring(1)}
                                         </Text>
                                     </View>
@@ -178,7 +177,7 @@ class DataTable extends React.Component {
                     <View style={styles.noOfPages}>
                         <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>1-2 of 6</Text>
                     </View>
-                    
+
                     <TouchableComponent>
                         <View style={styles.lessThan}>
                             <Image source={require('../assets/lessThan.png')} />
@@ -186,7 +185,7 @@ class DataTable extends React.Component {
                     </TouchableComponent>
                     <TouchableComponent>
                         <View style={styles.greaterThan}>
-                            <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={{ height: 40/2}} />
+                            <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={{ height: 40 / 2 }} />
                         </View>
                     </TouchableComponent>
                 </View>
@@ -212,8 +211,10 @@ const styles = StyleSheet.create({
         paddingBottom: 18,
         flexDirection: 'row',
         alignItems: 'center',
+        // flexWrap:'wrap'
         // justifyContent: 'space-around'
-        // backgroundColor: 'green'
+        // backgroundColor: 'green',
+        height: '100%'
     },
     firstColContainer: {
         width: '20%',
