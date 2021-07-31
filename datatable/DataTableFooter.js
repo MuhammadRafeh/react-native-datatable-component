@@ -3,21 +3,27 @@ import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const LAST_ROW_HEIGHT = 40;
 
-const DataTableFooter = () => {
+const DataTableFooter = props => {
+
+    const {start, end, activeDataId, dataLength} = props    
+    
+    // if ()
+    console.log(start, end, activeDataId, dataLength)
+    
     return (
         <View style={styles.lastRow}>
             <View style={styles.noOfPages}>
-                <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>1-2 of 6</Text>
+                <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}></Text>
             </View>
 
             <TouchableOpacity>
                 <View style={styles.lessThan}>
-                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={{ height: LAST_ROW_HEIGHT / 2 }} />
+                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={styles.iconStyle} />
                 </View>
             </TouchableOpacity>
             <TouchableOpacity>
                 <View style={styles.greaterThan}>
-                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={{ height: LAST_ROW_HEIGHT / 2 }} />
+                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={styles.iconStyle} />
                 </View>
             </TouchableOpacity>
         </View>
@@ -69,5 +75,8 @@ const styles = StyleSheet.create({
     noOfPagesLabel: {
         color: 'grey',
         fontSize: 12
+    },
+    iconStyle: {
+        height: LAST_ROW_HEIGHT / 2
     }
 });
