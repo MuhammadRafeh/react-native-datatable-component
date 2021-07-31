@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import DataTableFooter from './DataTableFooter';
 import DataTableHeader from './DataTableHeader';
 import Line from './Line';
-import sortData from '../functions/Sort';
+import sortData from '../functions/sort';
 import showCurrentProgress from '../functions/showCurrentProgress';
 
 const { width, height } = Dimensions.get('window');

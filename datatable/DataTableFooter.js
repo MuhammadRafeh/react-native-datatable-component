@@ -23,12 +23,12 @@ const DataTableFooter = props => {
 
             <TouchableOpacity disabled={startObj?.startData == 1 ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'back')}>
                 <View style={styles.lessThan}>
-                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: startObj?.startData == 1 ? 0.5: 1}]} />
+                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: startObj?.startData == 1 ? 0.3: 1}]} />
                 </View>
             </TouchableOpacity>
             <TouchableOpacity disabled={endObj?.endData == dataLength ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'next')}>
                 <View style={styles.greaterThan}>
-                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: endObj?.endData == dataLength ? 0.5: 1}]} />
+                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: endObj?.endData == dataLength ? 0.3: 1}]} />
                 </View>
             </TouchableOpacity>
         </View>

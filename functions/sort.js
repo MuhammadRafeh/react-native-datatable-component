@@ -7,10 +7,16 @@ const sortData = (data, isColSortedAssending, colName, sortAssending = false) =>
     let setIsSortedAsc = false;
     if (sortAssending || !isColSortedAssending) { //here sorting Asc
         data.sort(function (a, b) {
-            if (a[colName] > b[colName]) {
+            let aa = a[colName];
+            let bb = b[colName];
+            if (typeof (aa) == 'string' && typeof (bb) == 'string') {
+                aa = a[colName].toLowerCase();
+                bb = b[colName].toLowerCase();
+            }
+            if (aa > bb) {
                 return 1;
             }
-            if (b[colName] > a[colName]) {
+            if (bb > aa) {
                 return -1;
             }
             return 0;
@@ -18,10 +24,16 @@ const sortData = (data, isColSortedAssending, colName, sortAssending = false) =>
         setIsSortedAsc = true;
     } else if (isColSortedAssending) { //here sorting Desc
         data.sort(function (a, b) {
-            if (a[colName] > b[colName]) {
+            let aa = a[colName];
+            let bb = b[colName];
+            if (typeof (aa) == 'string' && typeof (bb) == 'string') {
+                aa = a[colName].toLowerCase();
+                bb = b[colName].toLowerCase();
+            }
+            if (aa > bb) {
                 return -1;
             }
-            if (b[colName] > a[colName]) {
+            if (bb > aa) {
                 return 1;
             }
             return 0;
