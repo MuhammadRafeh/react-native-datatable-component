@@ -7,13 +7,18 @@ const DataTableFooter = props => {
 
     const {start, end, activeDataId, dataLength} = props    
     
-    // if ()
     console.log(start, end, activeDataId, dataLength)
-    
+
+    const mapStartToEndId = {}
+    // start.filter(obj => obj.id == activeDataId)
+    const startObj = start.find(obj => obj.id == activeDataId);
+    const endObj = end.find(obj => obj.id == activeDataId);
+
+    // console.log('232', a)
     return (
         <View style={styles.lastRow}>
             <View style={styles.noOfPages}>
-                <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}></Text>
+                <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>{startObj?.startData}-{endObj?.endData} of {dataLength}</Text>
             </View>
 
             <TouchableOpacity>
