@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 14.5,
         // backgroundColor: 'green',
-        
+        // flex: 1
+        // flexWrap: 'wrap'
     },
     rowCellContainer: {
         paddingTop: 10,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, Image, StyleSheet, Dimensions, Platform, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 import DataTableRow from './DataTableRow';
 import PropTypes from 'prop-types';
 
@@ -12,10 +12,16 @@ export const COL_TYPES = {
     ICON: 'ICON'
 }
 
+let TouchableComponent = TouchableOpacity
 
-const PADDING_HORIZONTAL = 15;
+// if (Platform.OS == 'android' && Platform.Version >= 21) {
+//     TouchableComponent = TouchableNativeFeedback
+// }
+
+
+const PADDING_HORIZONTAL = 10;
 const PADDING_TOP = 20;
-const PADDING_BOTTOM = 40;
+const PADDING_BOTTOM = 15;
 
 const TOTAL_WIDTH = 100; //'100%'
 
@@ -108,6 +114,8 @@ class DataTable extends React.Component {
 
     render() {
         // console.log(this.state.isSortedAssending)
+        const a = 'a';
+        // a.
         return (
             <View style={styles.componentContainer}
                 onLayout={e => {
@@ -131,17 +139,23 @@ class DataTable extends React.Component {
                             return (
 
                                 <TouchableOpacity key={index} style={[styles.headerRow, { width: this.state.defaultEachColumnWidth, justifyContent }]} onPress={this.handleColPress.bind(null, colName)}>
-                                    <Text style={{ paddingLeft }}>
+                                    <View style={{ paddingLeft }}>
                                         <Image source={require('../assets/doubleArrow.png')} />
-                                    </Text>
-                                    <Text
-                                        style={{
-                                            color: 'grey',
-                                            fontSize: 12,
-                                            paddingRight,
-                                        }}>
-                                        {' ' + colName}
-                                    </Text>
+                                    </View>
+                                    <View>
+                                        <Text
+                                            style={{
+                                                color: 'grey',
+                                                fontSize: 12,
+                                                paddingRight,
+                                                // backgroundColor: 'green'
+                                            }}
+                                            numberOfLines={1}
+                                            adjustsFontSizeToFit={true}
+                                            >
+                                            {' ' + colName[0].toUpperCase() + colName.substring(1)}
+                                        </Text>
+                                    </View>
                                 </TouchableOpacity>
                             );
                         })
@@ -159,10 +173,22 @@ class DataTable extends React.Component {
                         colNameType={this.colNameType}
                         colNames={this.state.colNames}
                         style={{ defaultWidth: this.state.defaultEachColumnWidth }}
-                    // getRowSelectedData={getRowSelectedData} 
                     />)}
                 <View style={styles.lastRow}>
-
+                    <View style={styles.noOfPages}>
+                        <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>1-2 of 6</Text>
+                    </View>
+                    
+                    <TouchableComponent>
+                        <View style={styles.lessThan}>
+                            <Image source={require('../assets/lessThan.png')} />
+                        </View>
+                    </TouchableComponent>
+                    <TouchableComponent>
+                        <View style={styles.greaterThan}>
+                            <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={{ height: 40/2}} />
+                        </View>
+                    </TouchableComponent>
                 </View>
             </View>
         );
@@ -175,7 +201,6 @@ const styles = StyleSheet.create({
     componentContainer: {
         backgroundColor: '#e4edec',
         paddingHorizontal: PADDING_HORIZONTAL,
-        paddingBottom: PADDING_BOTTOM,
     },
     headerContainer: {
         flexDirection: 'row',
@@ -205,9 +230,47 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     lastRow: {
+        // marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: 40,
+        // backgroundColor: 'green'
+        // paddingBottom: PADDING_BOTTOM,
+        // marginRight: 7
+    },
+    greaterThan: {
+        paddingRight: 7,
+        paddingLeft: 14.5,
+        // paddingTop: 13,
+        // paddingBottom: PADDING_BOTTOM,
+        justifyContent: 'center',
+        // alignItems: 'flex-end',
+        height: '100%',
+        // backgroundColor: 'green'
+    },
+    lessThan: {
+        paddingLeft: 14.5,
+        // paddingTop: 13,
+        // paddingBottom: PADDING_BOTTOM,
+        paddingRight: 14.5,
+        justifyContent: 'center',
+        height: '100%',
+        // backgroundColor: '#414a4c',
+    },
+    noOfPages: {
+        paddingLeft: 14.5,
+        // paddingTop: 12,
+        // paddingBottom: PADDING_BOTTOM,
+        paddingRight: 14.5,
+        justifyContent: 'center'
+        // height: 40,
+        // backgroundColor: '#414a4c',
+
+    },
+    noOfPagesLabel: {
+        color: 'grey',
+        fontSize: 12
     }
 });
 
@@ -223,5 +286,5 @@ DataTable.propTypes = {
             noOfLines: PropTypes.number
         })
     ),
-    showNoOfRowsAtATime: PropTypes.number //default all
+    showNoOfRowsPerDisplay: PropTypes.number //default all
 }
