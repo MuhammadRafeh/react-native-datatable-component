@@ -3,18 +3,26 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { COL_TYPES } from './DataTable';
 import Line from './Line';
-
+// import { PADDING_HORIZONTAL } from './DataTable';
 const { width, height } = Dimensions.get('window');
 
 const DataTableRow = props => {
 
     const { data, colNames, style, mapColNameToType, widthOfLine } = props;
-    const [checked, setChecked] = useState(false);
-
+    // console.log(highlighted)
+    let color = 'black';
+    let backgroundColor = 'transparent';
+    if (data.doHighlight && data.doHighlight != 'default'){
+        color = typeof(data.doHighlight) != 'string' && (data.doHighlight?.textColor); //textColor
+        backgroundColor = typeof(data.doHighlight) == 'string' ? data.doHighlight: data.doHighlight?.backgroundColor;
+    } else if (data.doHighlight && data.doHighlight == 'default'){
+        color = 'white';
+        backgroundColor = '#990099';
+    }
     return (
         <>
 
-            <View style={styles.rowContainer}>
+            <View style={[styles.rowContainer, {backgroundColor}]}>
                 {
                     colNames.map((name, index) => {
                         const colType = mapColNameToType[name]
@@ -31,7 +39,7 @@ const DataTableRow = props => {
                         }
                         return (
                             <View key={index} style={[styles.rowCellContainer, { width: style.defaultEachColumnWidth }]}>
-                                <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign }]}>{data[name]}</Text>
+                                <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign, color }]}>{data[name]}</Text>
                             </View>
                         );
                     })
@@ -49,7 +57,8 @@ export default DataTableRow;
 const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
-        // backgroundColor: 'green'
+        backgroundColor: 'green',
+        paddingHorizontal: 10
     },
     rowCellText: {
         color: 'black',

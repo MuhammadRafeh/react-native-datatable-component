@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         height: LAST_ROW_HEIGHT,
+        paddingHorizontal: 10
         // backgroundColor: 'green'
         // paddingBottom: PADDING_BOTTOM,
         // marginRight: 7

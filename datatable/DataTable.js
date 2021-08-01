@@ -7,6 +7,7 @@ import DataTableHeader from './DataTableHeader';
 import Line from './Line';
 import sortData from '../functions/sort';
 import showCurrentProgress from '../functions/showCurrentProgress';
+// import 'react-native-gesture-handlerasd'
 
 const { width, height } = Dimensions.get('window');
 
@@ -18,6 +19,7 @@ export const COL_TYPES = {
 }
 
 // let TouchableComponent = TouchableOpacity
+// export const PADDING_HORIZONTAL = 10;
 
 // if (Platform.OS == 'android' && Platform.Version >= 21) {
 //     TouchableComponent = TouchableNativeFeedback
@@ -139,7 +141,7 @@ class DataTable extends React.Component {
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
 
         return (
             <View style={styles.componentContainer}
@@ -187,7 +189,7 @@ export default DataTable;
 const styles = StyleSheet.create({
     componentContainer: {
         backgroundColor: '#e4edec',
-        paddingHorizontal: PADDING_HORIZONTAL,
+        // paddingHorizontal: PADDING_HORIZONTAL,
     }
 });
 

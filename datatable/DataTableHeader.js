@@ -50,6 +50,7 @@ export default DataTableHeader;
 const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
+        paddingHorizontal: 10,
         alignItems: 'center',
         // backgroundColor: 'green'
     },
