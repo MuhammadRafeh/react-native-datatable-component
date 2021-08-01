@@ -200,11 +200,11 @@ DataTable.propTypes = {
         PropTypes.shape({
             name: PropTypes.string.isRequired,//Col Name
             type: PropTypes.string, //radio ||  int || string || icon
-            width: PropTypes.string,
-            showFullText: PropTypes.bool, //tranc || adjustSizeToFit
-            noOfLines: PropTypes.number
+            // width: PropTypes.string,
+            // showFullText: PropTypes.bool, //tranc || adjustSizeToFit
+            // noOfLines: PropTypes.number
         })
     ),
     noOfPages: PropTypes.number,
-    showNoOfRowsPerDisplay: PropTypes.number //default all
+    // showNoOfRowsPerDisplay: PropTypes.number //default all
 }
