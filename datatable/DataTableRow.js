@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { Checkbox } from 'react-native-paper';
 import { COL_TYPES } from './DataTable';
 import Line from './Line';
 // import { PADDING_HORIZONTAL } from './DataTable';
 const { width, height } = Dimensions.get('window');
+
 
 const DataTableRow = props => {
 
@@ -12,17 +12,17 @@ const DataTableRow = props => {
     // console.log(highlighted)
     let color = 'black';
     let backgroundColor = 'transparent';
-    if (data.doHighlight && data.doHighlight != 'default'){
-        color = typeof(data.doHighlight) != 'string' && (data.doHighlight?.textColor); //textColor
-        backgroundColor = typeof(data.doHighlight) == 'string' ? data.doHighlight: data.doHighlight?.backgroundColor;
-    } else if (data.doHighlight && data.doHighlight == 'default'){
+    if (data.doHighlight && data.doHighlight != 'default') {
+        color = typeof (data.doHighlight) != 'string' && (data.doHighlight?.textColor); //textColor
+        backgroundColor = typeof (data.doHighlight) == 'string' ? data.doHighlight : data.doHighlight?.backgroundColor;
+    } else if (data.doHighlight && data.doHighlight === 'default') {
         color = 'white';
         backgroundColor = '#990099';
     }
     return (
         <>
 
-            <View style={[styles.rowContainer, {backgroundColor}]}>
+            <View style={[styles.rowContainer, { backgroundColor }]}>
                 {
                     colNames.map((name, index) => {
                         const colType = mapColNameToType[name]
@@ -45,7 +45,7 @@ const DataTableRow = props => {
                     })
                 }
             </View>
-            
+
             <Line row width={widthOfLine} />
 
         </>

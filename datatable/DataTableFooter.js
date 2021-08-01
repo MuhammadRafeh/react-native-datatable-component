@@ -7,7 +7,7 @@ const DataTableFooter = props => {
 
     const {start, end, activeDataId, dataLength, handleNextPreviousPagePress} = props    
     
-    console.log(start, end, activeDataId, dataLength)
+    // console.log(start, end, activeDataId, dataLength)
 
     const mapStartToEndId = {}
     

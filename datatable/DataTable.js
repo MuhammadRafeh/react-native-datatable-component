@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, View, Image, StyleSheet, Dimensions, Platform, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import DataTableRow from './DataTableRow';
 import PropTypes from 'prop-types';
 import DataTableFooter from './DataTableFooter';
@@ -54,7 +54,6 @@ class DataTable extends React.Component {
         if (recentlySortedCol == name) {
             // Here we want to sort based on previus col State
             const data = sortData(newData, this.state.isSortedAssending[name], name)
-            // console.log(data)
             this.setState(state => ({
                 displayData: newData,
                 isSortedAssending: {
@@ -110,7 +109,6 @@ class DataTable extends React.Component {
         })
         let start = [];
         let end = []
-        // console.log( 'asd',this.props.data.length)
         if (this.props.data.length != 0) {
             const progress = showCurrentProgress(this.props?.noOfPages, this.props.data?.length) //[{id, endData}]
             if (progress) {
@@ -141,7 +139,6 @@ class DataTable extends React.Component {
     }
 
     render() {
-        // console.log(this.state)
 
         return (
             <View style={styles.componentContainer}
