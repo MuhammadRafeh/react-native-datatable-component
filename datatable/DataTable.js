@@ -83,7 +83,7 @@ class DataTable extends React.Component {
             const startObj = this.state.startDataArray.find(obj => obj.id == activeDisplayId + 1);
 
             this.setState({
-                displayData: this.state.data.slice(startObj.startData - 1, endObj.endData),
+                displayData: this.state.data.slice(startObj?.startData - 1, endObj?.endData),
                 activeDisplayDataId: activeDisplayId + 1
             });
 
@@ -93,7 +93,7 @@ class DataTable extends React.Component {
             const startObj = this.state.startDataArray.find(obj => obj.id == activeDisplayId - 1);
 
             this.setState({
-                displayData: this.state.data.slice(startObj.startData - 1, endObj.endData),
+                displayData: this.state.data.slice(startObj?.startData - 1, endObj?.endData),
                 activeDisplayDataId: activeDisplayId - 1
             });
         }
@@ -139,7 +139,7 @@ class DataTable extends React.Component {
     }
 
     render() {
-        // console.log(this.state.isSortedAssending)
+        console.log(this.state)
 
         return (
             <View style={styles.componentContainer}

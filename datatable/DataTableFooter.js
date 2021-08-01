@@ -10,7 +10,7 @@ const DataTableFooter = props => {
     console.log(start, end, activeDataId, dataLength)
 
     const mapStartToEndId = {}
-    // start.filter(obj => obj.id == activeDataId)
+    
     const startObj = start.find(obj => obj.id == activeDataId);
     const endObj = end.find(obj => obj.id == activeDataId);
 
