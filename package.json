@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MuhammadRafeh/react-native-datatable.git"
+    "url": "git+https://github.com/MuhammadRafeh/react-native-datatable-component.git"
   },
   "keywords": [
     "react-native-datatable",
@@ -22,7 +22,7 @@
   "author": "Muhammad Rafeh <muhammadrafehatique@outlook.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MuhammadRafeh/react-native-datatable/issues"
+    "url": "https://github.com/MuhammadRafeh/react-native-datatable-component/issues"
   },
   "dependencies": {
     "prop-types": "^15.7.2"
@@ -31,5 +31,5 @@
     "react": "17.0.1",
     "react-native": "0.64.2"
   },
-  "homepage": "https://github.com/MuhammadRafeh/react-native-datatable#readme"
+  "homepage": "https://github.com/MuhammadRafeh/react-native-datatable-component#readme"
 }
