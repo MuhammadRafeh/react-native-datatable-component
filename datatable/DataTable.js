@@ -31,7 +31,7 @@ const TOTAL_WIDTH = 100; //'100%'
 
 const defaultShowRows = 3; //means 3 percent
 
-class DataTable extends React.Component {
+class DataTable extends React.PureComponent {
     state = {
         data: [], //[{...}, {...}, ....]
         displayData: [], //currentlyDisplayData

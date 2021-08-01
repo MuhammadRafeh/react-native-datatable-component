@@ -3,7 +3,7 @@ import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const LAST_ROW_HEIGHT = 40;
 
-const DataTableFooter = props => {
+const DataTableFooter = React.memo((props) => {
 
     const {start, end, activeDataId, dataLength, handleNextPreviousPagePress} = props    
     
@@ -50,7 +50,7 @@ const DataTableFooter = props => {
             </TouchableOpacity>
         </View>
     );
-}
+});
 
 export default DataTableFooter;
 

@@ -5,7 +5,7 @@ import { COL_TYPES } from './DataTable';
 // import { PADDING_TOP } from './DataTable';
 const PADDING_TOP = 20;
 
-const DataTableHeader = props => {
+const DataTableHeader = React.memo((props) => {
 
     const {colNames, mapColNameToType, defaultEachColumnWidth, handleColPress} = props;
     
@@ -43,7 +43,7 @@ const DataTableHeader = props => {
             }
         </View>
     );
-}
+})
 
 export default DataTableHeader;
 

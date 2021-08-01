@@ -6,7 +6,7 @@ import Line from './Line';
 const { width, height } = Dimensions.get('window');
 
 
-const DataTableRow = props => {
+const DataTableRow = React.memo((props) => {
 
     const { data, colNames, style, mapColNameToType, widthOfLine } = props;
     // console.log(highlighted)
@@ -50,7 +50,7 @@ const DataTableRow = props => {
 
         </>
     );
-}
+})
 
 export default DataTableRow;
 
