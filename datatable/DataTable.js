@@ -127,7 +127,7 @@ class DataTable extends React.Component {
 
             return {
                 data: cloneData,
-                displayData: cloneData.slice(0, end[0]['endData']),
+                displayData: cloneData.slice(0, end[0]?.endData),
                 colNames: [...this.props.colNames],
                 defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
                 isSortedAssending: { ...state.isSortedAssending, ...isSortedAssending },

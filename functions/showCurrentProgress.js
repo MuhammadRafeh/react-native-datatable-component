@@ -6,27 +6,13 @@ const showCurrentProgress = (numOfPages = 3, fullLengthOfData) => { //default is
     if (fullLengthOfData == 0) {
         return null;
     }
-    // let sectionsOfData = numOfPages; 
-    const noOfDataPerDisplay = fullLengthOfData / numOfPages;
-
-    let isShowStartLabel = true;
+    
+    let noOfDataPerDisplay = fullLengthOfData / numOfPages;
 
     if (Math.floor(noOfDataPerDisplay) < 1) {//it's mean data length is smaller than no Of Pages;
+        console.log('as')
         numOfPages = 1;
-    }
-    if (fullLengthOfData < 6) {
-        isShowStartLabel = false;
-    }
-
-    if (!isShowStartLabel){
-        const endDisplayData = []
-        for (let i=0; i < fullLengthOfData;i++){
-            endDisplayData.push({id: i, endData: i + 1})
-        }
-        return {
-            end: endDisplayData,
-            start: []
-        }
+        noOfDataPerDisplay = fullLengthOfData; //fullLengthOfData / 1
     }
 
     const endDisplayData = []; //[{id: number, endData: number}]
@@ -46,9 +32,9 @@ const showCurrentProgress = (numOfPages = 3, fullLengthOfData) => { //default is
                 number += ceilData;
                 isCeilWasAdded = true;
             }
-            if (isShowStartLabel && !isCeilWasAdded) { //all loops
+            if (!isCeilWasAdded) { //all loops
                 startDisplayData.push({ id: i, startData: (number - floorData) + 1 })
-            } else if (isShowStartLabel && isCeilWasAdded) { //last loop
+            } else if (isCeilWasAdded) { //last loop
                 startDisplayData.push({ id: i, startData: (number - ceilData) + 1 })
             }
         }

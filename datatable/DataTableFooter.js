@@ -14,21 +14,38 @@ const DataTableFooter = props => {
     const startObj = start.find(obj => obj.id == activeDataId);
     const endObj = end.find(obj => obj.id == activeDataId);
 
-    // console.log('232', a)
+    let isShowSingleInfo = false;
+    if (startObj?.startData ==  endObj?.endData){
+        isShowSingleInfo = true;
+    }
+
+    let isDataAvailable = true;
+    if (!startObj && !endObj){
+        isDataAvailable = false;
+    }
+
     return (
         <View style={styles.lastRow}>
             <View style={styles.noOfPages}>
-                <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>{startObj?.startData}-{endObj?.endData} of {dataLength}</Text>
+                {
+                    isDataAvailable ? (isShowSingleInfo ? (
+                        <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>{endObj?.endData} of {dataLength}</Text>
+                    ): (
+                        <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>{startObj?.startData}-{endObj?.endData} of {dataLength}</Text>
+                    )): (
+                        <Text style={styles.noOfPagesLabel} numberOfLines={1} adjustsFontSizeToFit={true}>0 of 0</Text>
+                    )
+                }
             </View>
 
-            <TouchableOpacity disabled={startObj?.startData == 1 ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'back')}>
+            <TouchableOpacity disabled={(startObj?.startData == 1 || !isDataAvailable) ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'back')}>
                 <View style={styles.lessThan}>
-                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: startObj?.startData == 1 ? 0.3: 1}]} />
+                    <Image source={require('../assets/lessThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: (startObj?.startData == 1 || !isDataAvailable) ? 0.3: 1}]} />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity disabled={endObj?.endData == dataLength ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'next')}>
+            <TouchableOpacity disabled={(endObj?.endData == dataLength || !isDataAvailable) ? true: false} onPress={handleNextPreviousPagePress.bind(null, 'next')}>
                 <View style={styles.greaterThan}>
-                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: endObj?.endData == dataLength ? 0.3: 1}]} />
+                    <Image source={require('../assets/greaterThan.png')} resizeMode={'contain'} style={[styles.iconStyle, {opacity: (endObj?.endData == dataLength || !isDataAvailable) ? 0.3: 1}]} />
                 </View>
             </TouchableOpacity>
         </View>
