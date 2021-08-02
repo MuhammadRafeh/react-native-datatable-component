@@ -1,7 +1,7 @@
 {
   "name": "react-native-datatable-component",
-  "version": "1.0.1",
-  "description": "A React Native datatable component for dynamically perform actions like display, select, delete & so on.",
+  "version": "1.0.2",
+  "description": "A React Native datatable component for dynamically perform actions like display, sorting, select, custom design, delete & touch events.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
