@@ -101,34 +101,43 @@ class DataTable extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.colTypes = this.props.colSettings;
+        let data = this.props?.data
+        let colNames = this.props?.colNames;
+
+        if (typeof(data) != 'object'){
+            data = [];
+        } 
+        if (typeof(colNames) != 'object'){
+            colNames = ['No Columns'];
+        }
+
         this.mapColNameToType = {}
-        this.props.colSettings.forEach(setting => {
-            if (!this.props.colNames.includes(setting.name)) throw new Error('No Column exists which mentioned in provided colSettings Name!')
+        this.props.colSettings?.forEach(setting => {
+            if (!colNames.includes(setting.name)) throw new Error('No Column exists which mentioned in provided colSettings prop Name!')
             this.mapColNameToType[setting.name] = setting.type;
         })
         let start = [];
         let end = []
-        if (this.props.data.length != 0) {
-            const progress = showCurrentProgress(this.props?.noOfPages, this.props.data?.length) //[{id, endData}]
+        if (data.length != 0) {
+            const progress = showCurrentProgress(this.props?.noOfPages, data?.length) //[{id, endData}]
             if (progress) {
                 start = progress.start;
                 end = progress.end;
             }
         }
         this.setState((state) => {
-            const noOfCols = this.props.colNames.length;
+            const noOfCols = colNames.length;
             const isSortedAssending = {};
-            this.props.colNames.forEach(name => {
+            colNames.forEach(name => {
                 isSortedAssending[name] = false;
             })
 
-            const cloneData = [...this.props.data];
+            const cloneData = [...data];
 
             return {
                 data: cloneData,
                 displayData: cloneData.slice(0, end[0]?.endData),
-                colNames: [...this.props.colNames],
+                colNames: [...colNames],
                 defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
                 isSortedAssending: { ...state.isSortedAssending, ...isSortedAssending },
                 activeDisplayDataId: 0, //by default it's zero
