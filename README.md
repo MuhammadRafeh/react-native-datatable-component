@@ -110,6 +110,8 @@ Data must be List of Objects where each object will represent a Row Object's Key
 
 1. doHighlight
 
+*If you want to highlight Any Row then use this*
+
 ```js
   
   {..., doHighlight: 'default'} // To use Component's default Highlight Color
@@ -119,9 +121,6 @@ Data must be List of Objects where each object will represent a Row Object's Key
   {..., doHighlight: { backgroundColor: 'RGB/HEX/COLOR Name', textColor: 'RGB/HEX/COLOR Name' }} // Pass object if you want to change Text Color.
   
 ```
-
-*If you want to highlight Any Row just pass doHighlight key *
-
 
 
 `colNames` *List of Strings*
