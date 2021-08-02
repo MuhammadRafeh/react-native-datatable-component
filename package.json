@@ -1,6 +1,6 @@
 {
   "name": "react-native-datatable-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React Native datatable component for dynamically perform actions like display, select, delete & so on.",
   "main": "index.js",
   "scripts": {
