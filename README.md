@@ -116,7 +116,7 @@ Data must be List of Objects where each object will represent a Row Object's Key
   {..., doHighlight: 'green'} // Any Color Name
   {..., doHighlight: 'rgb(255,233,22)'} // Accepts RGB
   {..., doHighlight: 'rgb(255,233,22, 0.6)'} // Accepts RGBA
-  {..., { backgroundColor: 'RGB/HEX/COLOR Name', textColor: 'RGB/HEX/COLOR Name' }} // Pass object if you want to change Text Color.
+  {..., doHighlight: { backgroundColor: 'RGB/HEX/COLOR Name', textColor: 'RGB/HEX/COLOR Name' }} // Pass object if you want to change Text Color.
   
 ```
 
