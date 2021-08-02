@@ -86,7 +86,7 @@ Name | Type| Default | Is Require
 data | [] of {} | - | Yes 
 colNames | [] of Strings | - | Yes 
 colSettings | [] of {} | - | No
-noOfPages | Number | 3 | No
+noOfPages | Number | 2 | No
 
 ## Constants
 
