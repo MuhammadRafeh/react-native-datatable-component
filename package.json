@@ -1,6 +1,6 @@
 {
   "name": "react-native-datatable-component",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A React Native datatable component for dynamically perform actions like display, sorting, select, custom design, delete & touch events.",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "react native table"
   ],
   "author": "Muhammad Rafeh <muhammadrafehatique@outlook.com>",
-  "license": "SEE LICENSE IN <LICENSE>",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/MuhammadRafeh/react-native-datatable-component/issues"
   },
