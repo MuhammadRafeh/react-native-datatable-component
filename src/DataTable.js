@@ -12,10 +12,10 @@ import showCurrentProgress from '../functions/showCurrentProgress';
 const { width, height } = Dimensions.get('window');
 
 export const COL_TYPES = {
-    RADIO: 'RADIO',
+    // RADIO: 'RADIO',
     INT: 'INT',
     STRING: 'STRING',
-    ICON: 'ICON'
+    // ICON: 'ICON'
 }
 
 // let TouchableComponent = TouchableOpacity

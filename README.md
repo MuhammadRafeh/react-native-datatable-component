@@ -88,6 +88,20 @@ colNames | [] of Strings | - | Yes
 colSettings | [] of {} | - | No
 noOfPages | Number | 3 | No
 
+## Constants
+
+```js
+
+  import DataTable, {COL_TYPES} from 'react-native-datatable-component';
+
+  // Values
+  // COL_TYPES.INT
+  // COL_TYPES.STRING
+
+  //Below You will learn while providing colSettings, In type you'll Provide Above these.
+
+```
+
 ## Props Explanation
 
 `Data` *List of Objects*
@@ -145,8 +159,8 @@ Below is the shape of Objects.
 
 //Object Shape
 {
-      name: String, // String will be the Column Name
-      type: String, // INT || STRING
+      name: 'name Of Column Here', // String will be the Column Name
+      type: COL_TYPES.STRING / COL_TYPES.STRING, // INT || STRING
 }
         
 ```
