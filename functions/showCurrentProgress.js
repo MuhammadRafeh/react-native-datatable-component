@@ -1,4 +1,4 @@
-const showCurrentProgress = (numOfPages = 3, fullLengthOfData) => { //default is 3
+const showCurrentProgress = (numOfPages = 2, fullLengthOfData) => { //default is 3
     if (+numOfPages < 1) {
         throw new Error('No Of Pages Should be equal or greater Than 1')
     }
