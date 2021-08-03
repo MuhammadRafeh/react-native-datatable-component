@@ -14,7 +14,7 @@ const DataTableHeader = React.memo((props) => {
             {
                 colNames.map((colName, index) => {
                     const colType = mapColNameToType[colName]
-                    const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.ICON || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
+                    const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.CHECK_BOX || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
                     let paddingLeft = 0;
                     let paddingRight = 0;
                     if (justifyContent == 'flex-start') {
@@ -24,12 +24,19 @@ const DataTableHeader = React.memo((props) => {
                         paddingRight = 13;
                         paddingLeft = 1
                     }
+                    if (colType == COL_TYPES.CHECK_BOX){
+                        return (
+                            <View style={[styles.headerRow, { width: defaultEachColumnWidth, justifyContent }]}>
+                                <Text style={[styles.headerLabel, {textAlign: 'center'}]}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
+                            </View>
+                        )
+                    }
                     return (
                         <TouchableOpacity key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, justifyContent }]} onPress={handleColPress.bind(null, colName)}>
                             <View style={{ paddingLeft }}>
                                 <Image source={require('../assets/doubleArrow.png')} />
                             </View>
-                            <View style={{}}>
+                            <View>
                                 <Text
                                     style={[styles.headerLabel, {
                                         paddingRight

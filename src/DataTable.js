@@ -12,7 +12,7 @@ export const COL_TYPES = {
     // RADIO: 'RADIO',
     INT: 'INT',
     STRING: 'STRING',
-    // ICON: 'ICON'
+    CHECK_BOX: 'CHECK_BOX'
 }
 
 const TOTAL_WIDTH = 100; //'100%'
