@@ -62,21 +62,11 @@ const styles = StyleSheet.create({
     },
     rowCellText: {
         color: 'black',
-        fontSize: 14.5,
-        // backgroundColor: 'green',
-        // flex: 1
-        // flexWrap: 'wrap'
+        fontSize: 14.5
     },
     rowCellContainer: {
         paddingTop: 10,
         paddingBottom: 10,
-        // backgroundColor: 'green',
-    },
-    // line: {
-    //     height: 1,
-    //     backgroundColor: '#e3e3e3',
-    //     alignSelf: 'center',
-    //     width
-    // }
+    }
 });
 

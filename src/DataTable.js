@@ -7,9 +7,6 @@ import DataTableHeader from './DataTableHeader';
 import Line from './Line';
 import sortData from '../functions/sort';
 import showCurrentProgress from '../functions/showCurrentProgress';
-// import 'react-native-gesture-handlerasd'
-
-const { width, height } = Dimensions.get('window');
 
 export const COL_TYPES = {
     // RADIO: 'RADIO',
@@ -18,18 +15,7 @@ export const COL_TYPES = {
     // ICON: 'ICON'
 }
 
-// let TouchableComponent = TouchableOpacity
-// export const PADDING_HORIZONTAL = 10;
-
-// if (Platform.OS == 'android' && Platform.Version >= 21) {
-//     TouchableComponent = TouchableNativeFeedback
-// }
-
-const PADDING_HORIZONTAL = 10;
-
 const TOTAL_WIDTH = 100; //'100%'
-
-const defaultShowRows = 3; //means 3 percent
 
 class DataTable extends React.PureComponent {
     state = {
@@ -38,7 +24,7 @@ class DataTable extends React.PureComponent {
         colNames: [],//['ad', 'asd', ...]
         defaultEachColumnWidth: '50%',
         // noOfCols: 0, //default 2, set 0 because of fast rendering at start
-        widthOfContainer: width,
+        widthOfContainer: 0,
         isSortedAssending: { recentlySortedCol: null }, //ColName: true||false
         startDataArray: [],//[{id: startData}]
         endDataArray: [], //[{id, endData}]
