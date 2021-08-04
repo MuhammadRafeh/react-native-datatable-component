@@ -8,7 +8,7 @@ const { width, height } = Dimensions.get('window');
 const DataTableRow = React.memo((props) => {
 
     //data is object
-    const { data, colNames, style, mapColNameToType, widthOfLine } = props;
+    const { data, colNames, style, mapColNameToType, widthOfLine, handleOnRowSelect } = props;
 
     let color = 'black';
     let backgroundColor = 'transparent';
@@ -37,13 +37,17 @@ const DataTableRow = React.memo((props) => {
                             paddingLeft = 1;
 
                         }
-                        console.log(data[name])
+
+                        // const handleOnCheckPress = (isChecked) => {
+                            // handleOnRowSelect(isChecked, data.id, name)
+                        // }
+                        // console.log(data[name])
                         return (
                             <View key={index} style={[styles.rowCellContainer, { width: style.defaultEachColumnWidth }]}>
                                 {
                                     textAlign == 'center' ? (
                                         <View style={{width: '100%', height: 20, alignItems: 'center', justifyContent: 'center'}}>
-                                            <CheckBox initialVal={data[name] == true ? true: false} /> 
+                                            <CheckBox info={{name, id: data.id}} handleOnRowSelect={handleOnRowSelect} initialVal={data[name] == true ? true: false}/> 
                                         </View>
                                     ): (
                                         <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign, color }]}>{data[name]}</Text>

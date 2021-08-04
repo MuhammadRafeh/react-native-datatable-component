@@ -1,25 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
-const CheckBox = props => { //props: initialVal
+const CheckBox = React.memo((props) => { //props: initialVal
 
-  const [isSelected, setIsSelected] = useState(props.initialVal || false);
-
-  const onSelect = () => {
-    props?.onPress?.bind(null, !isSelected)
-    setIsSelected(!isSelected)
-  }
+  const {initialVal, handleOnRowSelect, info} = props;
   
   return (
-      <TouchableOpacity style={styles.touchableOpacity} onPress={onSelect} disabled={props?.disabled}>
-        <View style={[styles.backLayer, {backgroundColor: isSelected ? 'rgba(42, 187, 155, 0.1)' : 'transparent'}]} />
-        <View style={[styles.container, { backgroundColor: isSelected ? (props?.backgroundColor ? props?.backgroundColor : 'blue') : 'transparent', borderColor: props?.backgroundColor ? props?.backgroundColor : 'blue'  }]}>
-          { isSelected && ( <Image source={require('../assets/tick.png')} style={[{tintColor: props?.tickColor ? props.tickColor: 'white'} ]} resizeMode={'cover'} /> )}
+      <TouchableOpacity style={styles.touchableOpacity} onPress={handleOnRowSelect?.bind(null, !initialVal, info.id, info.name)} disabled={props?.disabled}>
+        <View style={[styles.backLayer, {backgroundColor: initialVal ? 'rgba(42, 187, 155, 0.1)' : 'transparent'}]} />
+        <View style={[styles.container, { backgroundColor: initialVal ? (props?.backgroundColor ? props?.backgroundColor : 'blue') : 'transparent', borderColor: props?.backgroundColor ? props?.backgroundColor : 'blue'  }]}>
+          { initialVal && ( <Image source={require('../assets/tick.png')} style={[{tintColor: props?.tickColor ? props.tickColor: 'white'} ]} resizeMode={'cover'} /> )}
         </View>
       </TouchableOpacity>
   );
-}
+})
 
 export default CheckBox;
 

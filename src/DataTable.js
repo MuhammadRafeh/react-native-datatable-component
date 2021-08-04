@@ -65,6 +65,24 @@ class DataTable extends React.Component {
         }
     }
 
+    handleOnRowSelect = (isChecked, id, colName) => {
+        const data = this.state.data.map(row => {
+            if (row.id != id) return row;
+            if ('onRowSelect' in this.props) this.props?.onRowSelect({...row, [colName]: isChecked}) // Sending props
+            return {...row, [colName]: isChecked} 
+        })
+        
+        const displayData = this.state.displayData.map(row => {
+            if (row.id != id) return row;
+            return {...row, [colName]: isChecked} 
+        })
+
+        this.setState({
+            data,
+            displayData
+        })
+    }
+
     handleNextPreviousPagePress = (type) => {//next | back
         if (type == 'next') {
             // this.state.activeDisplayDataId
@@ -91,9 +109,8 @@ class DataTable extends React.Component {
 
     static getDerivedStateFromProps(props, currentState) {
         //this called on every setState() & on mount & on prop changes
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         if (JSON.stringify(props.data) === JSON.stringify(currentState.dataPropSnap)) return null;
-
+        //Here below code means that data prop is changed
         let data = props?.data
         let colNames = props?.colNames;
 
@@ -165,6 +182,7 @@ class DataTable extends React.Component {
                 {
                     this.state.displayData.map((item, index) => (
                         <DataTableRow
+                            handleOnRowSelect={this.handleOnRowSelect}
                             widthOfLine={this.state.widthOfContainer}
                             key={index}
                             index={index}
@@ -211,5 +229,6 @@ DataTable.propTypes = {
         })
     ),
     noOfPages: PropTypes.number,
+    onRowSelect: PropTypes.func
     // showNoOfRowsPerDisplay: PropTypes.number //default all
 }
