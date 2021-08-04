@@ -42,7 +42,7 @@ const DataTableRow = React.memo((props) => {
                             <View key={index} style={[styles.rowCellContainer, { width: style.defaultEachColumnWidth }]}>
                                 {
                                     textAlign == 'center' ? (
-                                        <View key={index} style={{width: '100%', height: 20, alignItems: 'center', justifyContent: 'center'}}>
+                                        <View style={{width: '100%', height: 20, alignItems: 'center', justifyContent: 'center'}}>
                                             <CheckBox initialVal={data[name] == true ? true: false} /> 
                                         </View>
                                     ): (

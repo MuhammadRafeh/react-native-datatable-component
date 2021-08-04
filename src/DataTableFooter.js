@@ -23,7 +23,7 @@ const DataTableFooter = React.memo((props) => {
     if (!startObj && !endObj){
         isDataAvailable = false;
     }
-
+    console.log(startObj, endObj)
     return (
         <View style={styles.lastRow}>
             <View style={styles.noOfPages}>

@@ -17,8 +17,9 @@ export const COL_TYPES = {
 
 const TOTAL_WIDTH = 100; //'100%'
 
-class DataTable extends React.PureComponent {
+class DataTable extends React.Component {
     state = {
+        dataPropSnap: null,
         data: [], //[{...}, {...}, ....]
         displayData: [], //currentlyDisplayData
         colNames: [],//['ad', 'asd', ...]
@@ -89,16 +90,17 @@ class DataTable extends React.PureComponent {
     }
 
     static getDerivedStateFromProps(props, currentState) {
-        // console.log(props)
-        if (JSON.stringify(props.data) === JSON.stringify(currentState.data)) return null;
+        //this called on every setState() & on mount & on prop changes
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        if (JSON.stringify(props.data) === JSON.stringify(currentState.dataPropSnap)) return null;
 
         let data = props?.data
         let colNames = props?.colNames;
 
-        if (typeof (data) != 'object') {
+        if (typeof(data) != 'object') {
             data = [];
         }
-        if (typeof (colNames) != 'object') {
+        if (typeof(colNames) != 'object') {
             colNames = ['No Columns'];
         }
 
@@ -123,11 +125,16 @@ class DataTable extends React.PureComponent {
             isSortedAssending[name] = false;
         })
 
-        const cloneData = [...data];
-
+        // const modifiedData = [...data];
+        const modifiedData = data.map((row, index) => {
+            if (!row.id) return {...row, id: index}
+            return row;
+        })
+        // console.log(modifiedData)
         return {
-            data: cloneData,
-            displayData: cloneData.slice(0, end[0]?.endData),
+            dataPropSnap: props?.data,
+            data: modifiedData,
+            displayData: modifiedData.slice(0, end[0]?.endData),
             colNames: [...colNames],
             defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
             isSortedAssending: { ...currentState.isSortedAssending, ...isSortedAssending },
@@ -160,6 +167,7 @@ class DataTable extends React.PureComponent {
                         <DataTableRow
                             widthOfLine={this.state.widthOfContainer}
                             key={index}
+                            index={index}
                             data={item}
                             mapColNameToType={this.state.mapColNameToType}
                             colNames={this.state.colNames}
