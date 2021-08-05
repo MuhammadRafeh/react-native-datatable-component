@@ -40,6 +40,7 @@ import DataTable from 'react-native-datatable-component';
 ```js
 
 import React from 'react';
+import DataTable, {COL_TYPES} from 'react-native-datatable-component';
 
 const someComponent = props => {
     return (
@@ -53,7 +54,7 @@ const someComponent = props => {
                 { name: 'Muhammad Moiz', age: 13, gender: 'male' }
             ]} // list of objects
             colNames={['name', 'age', 'gender']} //List of Strings
-            colSettings={[{ name: 'name', type: 'STRING' }, { name: 'age', type: 'INT' }, {name: 'gender', type: 'STRING'}]}//List of Objects
+            colSettings={[{ name: 'name', type: COL_TYPES.STRING }, { name: 'age', type: COL_TYPES.INT }, {name: 'gender', type: COL_TYPES.STRING}]}//List of Objects
             noOfPages={2} //number
         />
     );
@@ -68,7 +69,7 @@ You can easily control it's width by wrapping it with View
 
 ```js
 
-<View style={{width: '80%', alignSelf: 'center'}}> {//margin: 20}
+<View style={{width: '80%', alignSelf: 'center'}}> //margin: 20}
   <DataTable {...props} />
 </View>
 
@@ -87,6 +88,7 @@ data | [] of {} | - | Yes
 colNames | [] of Strings | - | Yes 
 colSettings | [] of {} | - | No
 noOfPages | Number | 2 | No
+onRowSelect | Func | - | No
 
 ## Constants
 
@@ -97,8 +99,9 @@ noOfPages | Number | 2 | No
   // Values
   // COL_TYPES.INT
   // COL_TYPES.STRING
+  // COL_TYPES.CHECK_BOX
 
-  //Below You will learn while providing colSettings, In type you'll Provide Above these.
+  //Below You will learn how to use constants while doing colSettings.
 
 ```
 
@@ -168,6 +171,38 @@ Below is the shape of Objects.
 `noOfPages` *Number*
 
 How Many Pages/Sections You want in DataTable!!!
+
+`onRowSelect` *Function*
+
+DataTable passes full row in Object in which colName's value will change according to check press! 
+
+```js
+     
+import DataTable, {COL_TYPES} from 'react-native-datatable-component';
+    
+const someCom = () => {
+
+     //You can pass COL_TYPES.CHECK_BOX Column's value in true/false, by default it will be false means checkBox will be uncheck!
+     
+     const data = [
+           { menu: 'Chicken Biryani', select: false }, //If user select this row then this whole object will return to you with select true in this case
+           { menu: 'Chiken koofta', select: true },
+           { menu: 'Chicken sharwma', select: false }
+     ]
+     
+     const nameOfCols = ['menu', 'select'];
+     
+     return(
+          <DataTable
+               onRowSelect={(row) => {console.log('ROW => ',row)}}
+               data={data}
+               colNames={nameOfCols}
+               colSettings={[{name: 'select', type: COL_TYPES.CHECK_BOX}]}
+          />
+     )
+}
+
+```
 
 ## In Development
 
