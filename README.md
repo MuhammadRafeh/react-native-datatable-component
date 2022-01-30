@@ -9,11 +9,7 @@ Not so much complex & unnecessary thing Exists. All those basics functionality w
 
 ## Preview
 
-<!-- <img src="https://live.staticflickr.com/65535/51349744677_4d8704a8a4_h.jpg"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px; width: '20%'" /> -->
-     
-<!-- ![Demo](https://live.staticflickr.com/65535/51349744677_4d8704a8a4_h.jpg) -->
+
 <img src="https://live.staticflickr.com/65535/51349744677_4e83954287_z.jpg" width="35%"  alt="Demo">
 
 
@@ -40,9 +36,9 @@ import DataTable from 'react-native-datatable-component';
 ```js
 
 import React from 'react';
-import DataTable, {COL_TYPES} from 'react-native-datatable-component';
+import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 
-const someComponent = props => {
+const SomeComponent = props => {
     return (
         <DataTable
             data={[ 
@@ -56,11 +52,12 @@ const someComponent = props => {
             colNames={['name', 'age', 'gender']} //List of Strings
             colSettings={[{ name: 'name', type: COL_TYPES.STRING }, { name: 'age', type: COL_TYPES.INT }, {name: 'gender', type: COL_TYPES.STRING}]}//List of Objects
             noOfPages={2} //number
+            backgroundColor={'rgba(23,2,4,0.3)'} //Table Background Color
         />
     );
 }
 
-export default someComponent;
+export default SomeComponent;
 
 ```
 
@@ -89,6 +86,7 @@ colNames | [] of Strings | - | Yes
 colSettings | [] of {} | - | No
 noOfPages | Number | 2 | No
 onRowSelect | Func | - | No
+backgroundColor | string, rgba, hex | '#e4edec' | No
 
 ## Constants
 
@@ -163,7 +161,7 @@ Below is the shape of Objects.
 //Object Shape
 {
       name: 'name Of Column Here', // String will be the Column Name
-      type: COL_TYPES.STRING / COL_TYPES.STRING, // INT || STRING
+      type: COL_TYPES.STRING / COL_TYPES.CHECK_BOX, // INT || STRING
 }
         
 ```
@@ -180,7 +178,7 @@ DataTable passes full row in Object in which colName's value will change accordi
      
 import DataTable, {COL_TYPES} from 'react-native-datatable-component';
     
-const someCom = () => {
+const SomeCom = () => {
 
      //You can pass COL_TYPES.CHECK_BOX Column's value in true/false, by default it will be false means checkBox will be uncheck!
      
@@ -201,6 +199,8 @@ const someCom = () => {
           />
      )
 }
+
+export default SomeCom;
 
 ```
 

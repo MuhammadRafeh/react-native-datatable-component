@@ -9,7 +9,6 @@ import sortData from '../functions/sort';
 import showCurrentProgress from '../functions/showCurrentProgress';
 
 export const COL_TYPES = {
-    // RADIO: 'RADIO',
     INT: 'INT',
     STRING: 'STRING',
     CHECK_BOX: 'CHECK_BOX'
@@ -68,13 +67,13 @@ class DataTable extends React.Component {
     handleOnRowSelect = (isChecked, id, colName) => {
         const data = this.state.data.map(row => {
             if (row.id != id) return row;
-            if ('onRowSelect' in this.props) this.props?.onRowSelect({...row, [colName]: isChecked}) // Sending props
-            return {...row, [colName]: isChecked} 
+            if ('onRowSelect' in this.props) this.props?.onRowSelect({ ...row, [colName]: isChecked }) // Sending props
+            return { ...row, [colName]: isChecked }
         })
-        
+
         const displayData = this.state.displayData.map(row => {
             if (row.id != id) return row;
-            return {...row, [colName]: isChecked} 
+            return { ...row, [colName]: isChecked }
         })
 
         this.setState({
@@ -114,10 +113,10 @@ class DataTable extends React.Component {
         let data = props?.data
         let colNames = props?.colNames;
 
-        if (typeof(data) != 'object') {
+        if (typeof (data) != 'object') {
             data = [];
         }
-        if (typeof(colNames) != 'object') {
+        if (typeof (colNames) != 'object') {
             colNames = ['No Columns'];
         }
 
@@ -144,7 +143,7 @@ class DataTable extends React.Component {
 
         // const modifiedData = [...data];
         const modifiedData = data.map((row, index) => {
-            if (!row.id) return {...row, id: index}
+            if (!row.id) return { ...row, id: index }
             return row;
         })
         // console.log(modifiedData)
@@ -165,7 +164,7 @@ class DataTable extends React.Component {
     render() {
 
         return (
-            <View style={styles.componentContainer}
+            <View style={{ ...styles.componentContainer, backgroundColor: this.props.backgroundColor }}
                 onLayout={e => {
                     this.setState({ widthOfContainer: e.nativeEvent.layout.width })
                 }}>
@@ -212,7 +211,6 @@ export default DataTable;
 const styles = StyleSheet.create({
     componentContainer: {
         backgroundColor: '#e4edec',
-        // paddingHorizontal: PADDING_HORIZONTAL,
     }
 });
 
@@ -223,12 +221,8 @@ DataTable.propTypes = {
         PropTypes.shape({
             name: PropTypes.string.isRequired,//Col Name
             type: PropTypes.string, //radio ||  int || string || icon
-            // width: PropTypes.string,
-            // showFullText: PropTypes.bool, //tranc || adjustSizeToFit
-            // noOfLines: PropTypes.number
         })
     ),
     noOfPages: PropTypes.number,
     onRowSelect: PropTypes.func
-    // showNoOfRowsPerDisplay: PropTypes.number //default all
 }
