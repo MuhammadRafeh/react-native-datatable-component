@@ -7,7 +7,7 @@ const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const {colNames, mapColNameToType, defaultEachColumnWidth, handleColPress} = props;
+    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, colNameSplitter} = props;
     
     return (
         <View style={styles.headerContainer}>
@@ -27,7 +27,7 @@ const DataTableHeader = React.memo((props) => {
                     if (colType == COL_TYPES.CHECK_BOX){
                         return (
                             <View style={[styles.headerRow, { width: defaultEachColumnWidth, justifyContent }]}>
-                                <Text style={[styles.headerLabel, {textAlign: 'center'}]}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
+                                <Text style={[styles.headerLabel, { textAlign: 'center' }]}>{colName.replaceAll(colNameSplitter, " \n")}</Text>
                             </View>
                         )
                     }
@@ -41,7 +41,7 @@ const DataTableHeader = React.memo((props) => {
                                     style={[styles.headerLabel, {
                                         paddingRight
                                     }]}>
-                                    {' ' + colName[0].toUpperCase() + colName.substring(1)}
+                                    {colName.replaceAll(colNameSplitter, " \n")}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -71,6 +71,9 @@ const styles = StyleSheet.create({
     },
     headerLabel: {
         color: 'grey',
-        fontSize: 12
+        fontSize: 12,
+        fontWeight: "bold",
+        textTransform:"uppercase"
+        //flex wrap not working here
     }
 });
