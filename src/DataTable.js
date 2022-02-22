@@ -22,6 +22,7 @@ class DataTable extends React.Component {
         data: [], //[{...}, {...}, ....]
         displayData: [], //currentlyDisplayData
         colNames: [],//['ad', 'asd', ...]
+        colNameSplitter: null,
         defaultEachColumnWidth: '50%',
         // noOfCols: 0, //default 2, set 0 because of fast rendering at start
         widthOfContainer: 0,
@@ -112,12 +113,21 @@ class DataTable extends React.Component {
         //Here below code means that data prop is changed
         let data = props?.data
         let colNames = props?.colNames;
+        let colNameSplitter = props?.colNameSplitter;
 
         if (typeof (data) != 'object') {
             data = [];
         }
         if (typeof (colNames) != 'object') {
             colNames = ['No Columns'];
+        }
+        if (colNameSplitter != null) {
+            if (typeof (colNameSplitter) != 'string') {
+                if (colNameSplitter.length != 1) {
+                    // colNameSplitter should be single character
+                    colNameSplitter = null;
+                }
+            }
         }
 
         const mapColNameToType = {}
@@ -152,6 +162,7 @@ class DataTable extends React.Component {
             data: modifiedData,
             displayData: modifiedData.slice(0, end[0]?.endData),
             colNames: [...colNames],
+            colNameSplitter: colNameSplitter,
             defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
             isSortedAssending: { ...currentState.isSortedAssending, ...isSortedAssending },
             activeDisplayDataId: 0, //by default it's zero
@@ -171,6 +182,7 @@ class DataTable extends React.Component {
 
                 <DataTableHeader
                     colNames={this.state.colNames}
+                    colNameSplitter={this.state.colNameSplitter}
                     mapColNameToType={this.state.mapColNameToType}
                     defaultEachColumnWidth={this.state.defaultEachColumnWidth}
                     handleColPress={this.handleColPress}
