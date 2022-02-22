@@ -75,6 +75,20 @@ You can easily control it's width by wrapping it with View
 
 ```
 
+## ScrollView: Want to Scroll Data?
+You can scroll datatable Rows by wrapping it with view and with mentioning height
+
+```js
+
+<View style={{margin: 20, height: 300}}> // Give height whatever you want
+  <DataTable {...props} />
+</View>
+
+// If you dont mention height then it will only scroll when data was going off the screen
+// But it's recommended to give height!!!
+
+```
+
 ## Props
 
 DataTable component accepts following props.
