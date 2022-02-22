@@ -2,13 +2,12 @@ import React from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { COL_TYPES } from './DataTable';
 
-// import { PADDING_TOP } from './DataTable';
 const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, colNameSplitter} = props;
-    
+    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress } = props;
+
     return (
         <View style={styles.headerContainer}>
             {
@@ -24,10 +23,10 @@ const DataTableHeader = React.memo((props) => {
                         paddingRight = 13;
                         paddingLeft = 1
                     }
-                    if (colType == COL_TYPES.CHECK_BOX){
+                    if (colType == COL_TYPES.CHECK_BOX) {
                         return (
-                            <View style={[styles.headerRow, { width: defaultEachColumnWidth, justifyContent }]}>
-                                <Text style={[styles.headerLabel, { textAlign: 'center' }]}>{colName.replaceAll(colNameSplitter, " \n")}</Text>
+                            <View key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, justifyContent }]}>
+                                <Text style={[styles.headerLabel, { textAlign: 'center' }]} adjustsFontSizeToFit={true} numberOfLines={20}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
                             </View>
                         )
                     }
@@ -36,12 +35,14 @@ const DataTableHeader = React.memo((props) => {
                             <View style={{ paddingLeft }}>
                                 <Image source={require('../assets/doubleArrow.png')} />
                             </View>
-                            <View>
+                            <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
                                 <Text
+                                    adjustsFontSizeToFit={true}
+                                    numberOfLines={20}
                                     style={[styles.headerLabel, {
                                         paddingRight
                                     }]}>
-                                    {colName.replaceAll(colNameSplitter, " \n")}
+                                    {' ' + colName[0].toUpperCase() + colName.substring(1)}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -59,21 +60,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 10,
         alignItems: 'center',
-        // backgroundColor: 'green'
     },
     headerRow: {
         paddingTop: PADDING_TOP,
         paddingBottom: 18,
         flexDirection: 'row',
         alignItems: 'center',
-        // backgroundColor: 'green',
         height: '100%'
     },
     headerLabel: {
         color: 'grey',
-        fontSize: 12,
-        fontWeight: "bold",
-        textTransform:"uppercase"
-        //flex wrap not working here
+        fontSize: 12
     }
 });

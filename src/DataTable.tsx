@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
-import DataTableRow from './DataTableRow';
-import PropTypes from 'prop-types';
-import DataTableFooter from './DataTableFooter';
-import DataTableHeader from './DataTableHeader';
-import Line from './Line';
-import sortData from '../functions/sort';
-import showCurrentProgress from '../functions/showCurrentProgress';
+import { View, ScrollView } from 'react-native';
+import DataTableRow from 'react-native-datatable-component/src/DataTableRow';
+import DataTableFooter from 'react-native-datatable-component/src/DataTableFooter';
+import DataTableHeader from 'react-native-datatable-component/src/DataTableHeader';
+import Line from 'react-native-datatable-component/src/Line';
+import sortData from 'react-native-datatable-component/functions/sort';
+import showCurrentProgress from 'react-native-datatable-component/functions/showCurrentProgress';
 
 export const COL_TYPES = {
     INT: 'INT',
@@ -16,13 +15,21 @@ export const COL_TYPES = {
 
 const TOTAL_WIDTH = 100; //'100%'
 
-class DataTable extends React.Component {
+interface PropTypes {
+    data?: object[];
+    colNames?: string[];
+    colSettings?: object[];
+    noOfPages?: number;
+    onRowSelect?: (anyVariable) => object;
+    backgroundColor?: string;
+}
+
+class DataTable extends React.Component<PropTypes> {
     state = {
         dataPropSnap: null,
         data: [], //[{...}, {...}, ....]
         displayData: [], //currentlyDisplayData
         colNames: [],//['ad', 'asd', ...]
-        colNameSplitter: null,
         defaultEachColumnWidth: '50%',
         // noOfCols: 0, //default 2, set 0 because of fast rendering at start
         widthOfContainer: 0,
@@ -113,21 +120,12 @@ class DataTable extends React.Component {
         //Here below code means that data prop is changed
         let data = props?.data
         let colNames = props?.colNames;
-        let colNameSplitter = props?.colNameSplitter;
 
         if (typeof (data) != 'object') {
             data = [];
         }
         if (typeof (colNames) != 'object') {
             colNames = ['No Columns'];
-        }
-        if (colNameSplitter != null) {
-            if (typeof (colNameSplitter) != 'string') {
-                if (colNameSplitter.length != 1) {
-                    // colNameSplitter should be single character
-                    colNameSplitter = null;
-                }
-            }
         }
 
         const mapColNameToType = {}
@@ -151,18 +149,15 @@ class DataTable extends React.Component {
             isSortedAssending[name] = false;
         })
 
-        // const modifiedData = [...data];
         const modifiedData = data.map((row, index) => {
             if (!row.id) return { ...row, id: index }
             return row;
         })
-        // console.log(modifiedData)
         return {
             dataPropSnap: props?.data,
             data: modifiedData,
             displayData: modifiedData.slice(0, end[0]?.endData),
             colNames: [...colNames],
-            colNameSplitter: colNameSplitter,
             defaultEachColumnWidth: TOTAL_WIDTH / noOfCols + '%',
             isSortedAssending: { ...currentState.isSortedAssending, ...isSortedAssending },
             activeDisplayDataId: 0, //by default it's zero
@@ -175,36 +170,35 @@ class DataTable extends React.Component {
     render() {
 
         return (
-            <View style={{ ...styles.componentContainer, backgroundColor: this.props.backgroundColor }}
+            <View style={{ backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#e4edec' }}
                 onLayout={e => {
                     this.setState({ widthOfContainer: e.nativeEvent.layout.width })
                 }}>
 
                 <DataTableHeader
                     colNames={this.state.colNames}
-                    colNameSplitter={this.state.colNameSplitter}
                     mapColNameToType={this.state.mapColNameToType}
                     defaultEachColumnWidth={this.state.defaultEachColumnWidth}
                     handleColPress={this.handleColPress}
                 />
 
                 <Line width={this.state.widthOfContainer} header />
-
-                {
-                    this.state.displayData.map((item, index) => (
-                        <DataTableRow
-                            handleOnRowSelect={this.handleOnRowSelect}
-                            widthOfLine={this.state.widthOfContainer}
-                            key={index}
-                            index={index}
-                            data={item}
-                            mapColNameToType={this.state.mapColNameToType}
-                            colNames={this.state.colNames}
-                            style={{ defaultEachColumnWidth: this.state.defaultEachColumnWidth }}
-                        />
-                    ))
-                }
-
+                <ScrollView>
+                    {
+                        this.state.displayData.map((item, index) => (
+                            <DataTableRow
+                                handleOnRowSelect={this.handleOnRowSelect}
+                                widthOfLine={this.state.widthOfContainer}
+                                key={index}
+                                index={index}
+                                data={item}
+                                mapColNameToType={this.state.mapColNameToType}
+                                colNames={this.state.colNames}
+                                style={{ defaultEachColumnWidth: this.state.defaultEachColumnWidth }}
+                            />
+                        ))
+                    }
+                </ScrollView>
                 <DataTableFooter
                     start={this.state.startDataArray}
                     end={this.state.endDataArray}
@@ -219,22 +213,3 @@ class DataTable extends React.Component {
 }
 
 export default DataTable;
-
-const styles = StyleSheet.create({
-    componentContainer: {
-        backgroundColor: '#e4edec',
-    }
-});
-
-DataTable.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    colNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-    colSettings: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,//Col Name
-            type: PropTypes.string, //radio ||  int || string || icon
-        })
-    ),
-    noOfPages: PropTypes.number,
-    onRowSelect: PropTypes.func
-}
