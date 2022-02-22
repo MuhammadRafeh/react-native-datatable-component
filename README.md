@@ -52,7 +52,7 @@ const SomeComponent = props => {
             colNames={['name', 'age', 'gender']} //List of Strings
             colSettings={[{ name: 'name', type: COL_TYPES.STRING }, { name: 'age', type: COL_TYPES.INT }, {name: 'gender', type: COL_TYPES.STRING}]}//List of Objects
             noOfPages={2} //number
-            backgroundColor={'rgba(23,2,4,0.3)'} //Table Background Color
+            backgroundColor={'rgba(23,2,4,0.2)'} //Table Background Color
         />
     );
 }
