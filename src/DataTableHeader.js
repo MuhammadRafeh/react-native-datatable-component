@@ -31,17 +31,15 @@ const DataTableHeader = React.memo((props) => {
                         )
                     }
                     return (
-                        <TouchableOpacity key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, justifyContent }]} onPress={handleColPress.bind(null, colName)}>
-                            <View style={{ paddingLeft }}>
+                        <TouchableOpacity key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
+                            <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: 8 }}>
                                 <Image source={require('../assets/doubleArrow.png')} />
                             </View>
                             <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
                                 <Text
                                     adjustsFontSizeToFit={true}
                                     numberOfLines={20}
-                                    style={[styles.headerLabel, {
-                                        paddingRight
-                                    }]}>
+                                    style={[styles.headerLabel]}>
                                     {' ' + colName[0].toUpperCase() + colName.substring(1)}
                                 </Text>
                             </View>
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
         paddingBottom: 18,
         flexDirection: 'row',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
     },
     headerLabel: {
         color: 'grey',
