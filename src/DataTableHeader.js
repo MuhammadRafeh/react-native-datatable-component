@@ -6,7 +6,9 @@ const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress } = props;
+    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort } = props;
+
+    const isDoSort = doSort == false ? false : true;
 
     return (
         <View style={styles.headerContainer}>
@@ -31,9 +33,13 @@ const DataTableHeader = React.memo((props) => {
                         )
                     }
                     return (
-                        <TouchableOpacity key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
-                            <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: 8 }}>
-                                <Image source={require('../assets/doubleArrow.png')} />
+                        <TouchableOpacity disabled={!isDoSort} key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, paddingLeft: paddingLeft == 13 ? (doSort ? 13 : 11) : paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
+                            <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: isDoSort ? 8 : 0 }}>
+                                {
+                                    isDoSort && (
+                                        <Image source={require('../assets/doubleArrow.png')} />
+                                    )
+                                }
                             </View>
                             <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
                                 <Text

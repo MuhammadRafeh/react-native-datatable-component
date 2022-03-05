@@ -101,6 +101,7 @@ colSettings | [] of {} | - | No
 noOfPages | Number | 2 | No
 onRowSelect | Func | - | No
 backgroundColor | string, rgba, hex | '#e4edec' | No
+doSort | boolean | true | No
 
 ## Constants
 

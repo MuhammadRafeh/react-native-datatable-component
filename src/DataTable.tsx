@@ -22,6 +22,7 @@ interface PropTypes {
     noOfPages?: number;
     onRowSelect?: (anyVariable) => object;
     backgroundColor?: string;
+    doSort?: boolean;
 }
 
 class DataTable extends React.Component<PropTypes> {
@@ -180,6 +181,7 @@ class DataTable extends React.Component<PropTypes> {
                     mapColNameToType={this.state.mapColNameToType}
                     defaultEachColumnWidth={this.state.defaultEachColumnWidth}
                     handleColPress={this.handleColPress}
+                    doSort={this.props?.doSort}
                 />
 
                 <Line width={this.state.widthOfContainer} header />
