@@ -32,25 +32,34 @@ const DataTableHeader = React.memo((props) => {
                             </View>
                         )
                     }
-                    return (
-                        <TouchableOpacity disabled={!isDoSort} key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, paddingLeft: paddingLeft == 13 ? (doSort ? 13 : 11) : paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
-                            <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: isDoSort ? 8 : 0 }}>
-                                {
-                                    isDoSort && (
-                                        <Image source={require('../assets/doubleArrow.png')} />
-                                    )
-                                }
-                            </View>
-                            <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
-                                <Text
+                    if (isDoSort) {
+                        return (
+                            <TouchableOpacity key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
+                                <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: 8 }}>
+                                    <Image source={require('../assets/doubleArrow.png')} />
+                                </View>
+                                <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
+                                    <Text
+                                        adjustsFontSizeToFit={true}
+                                        numberOfLines={20}
+                                        style={[styles.headerLabel]}>
+                                        {' ' + colName[0].toUpperCase() + colName.substring(1)}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        );
+                    } else {
+                        const isLeft = paddingLeft == 1 ? false : true;
+                        return (
+                            <View style={{ width: defaultEachColumnWidth, paddingTop: PADDING_TOP, paddingBottom: 18 }} key={index}>
+                                <Text style={{ ...styles.headerLabel, paddingLeft, paddingRight, textAlign: isLeft ? 'left' : 'right', left: isLeft ? -0.5 : undefined }}
                                     adjustsFontSizeToFit={true}
                                     numberOfLines={20}
-                                    style={[styles.headerLabel]}>
-                                    {' ' + colName[0].toUpperCase() + colName.substring(1)}
-                                </Text>
+                                >
+                                    {colName[0].toUpperCase() + colName.substring(1)}</Text>
                             </View>
-                        </TouchableOpacity>
-                    );
+                        )
+                    }
                 })
             }
         </View>
