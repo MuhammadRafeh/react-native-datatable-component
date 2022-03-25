@@ -12,7 +12,7 @@ Not so much complex & unnecessary thing Exists. All those basics functionality w
 <p float="left">
 <img src="https://i.imgur.com/7kKsfyp.jpg" width="49.7%"  alt="Demo">
 <img src="https://i.imgur.com/VQuafzz.jpg" width="49%"  alt="Demo">
-<img src="https://i.imgur.com/ybVaJEE.jpg" width="49.3%"  alt="Demo">
+<img src="https://i.imgur.com/Uk4iNnl.jpg" width="49.8%"  alt="Demo">
 <img src="https://i.imgur.com/uXtuxyE.jpg" width="49%"  alt="Demo">
 </p>
 
