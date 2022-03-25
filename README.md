@@ -10,7 +10,8 @@ Not so much complex & unnecessary thing Exists. All those basics functionality w
 ## Preview
 
 
-<img src="https://live.staticflickr.com/65535/51349744677_4e83954287_z.jpg" width="35%"  alt="Demo">
+<img src="https://lh3.googleusercontent.com/pw/AM-JKLXGDTQhZQ3-q9BI_ExPcHs_qm63eRalphIvrkrd6kHU2sUc8MRGNlGD4OtTsbp6g-H9v18zg157e5MQxIYOkHOzKCEustzRpwatGkOf87DNvH6WjiKFHzR1ETOEfVoBK52WLvrGfegcrWrSDm1607g6=w864-h668-no?authuser=0" width="49.7%"  alt="Demo">
+<img src="https://lh3.googleusercontent.com/pw/AM-JKLVMBiN9acvCp2kI3ViR42LMIKr-XsJ8YBf0sWmjD6_LbO8tE1v1DK3nQBY0LQV24YuLtIlC_2iH3jy19LkUI3AO_9RUpckSzNArX6xqM3u68aANliicxCuENSEG5l65J0bo44GlZb9pN68b157c8i6d=w850-h668-no?authuser=0" width="49%"  alt="Demo">
 
 
 ## Installation
