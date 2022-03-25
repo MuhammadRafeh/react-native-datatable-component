@@ -9,10 +9,7 @@ Not so much complex & unnecessary thing Exists. All those basics functionality w
 
 ## Preview
 
-<p float="left">
-<img src="https://drive.google.com/uc?id=1KLCTMMSFZWDnAGY2FuBUs2FSOILtWW2_" width="49.7%"  alt="Demo">
-<img src="https://drive.google.com/uc?id=12fVA8ughoQ6UU6x8opcFBQWpCj8CkWv1" width="49%"  alt="Demo">
-</p>
+<img src="https://lh3.googleusercontent.com/pw/AM-JKLXGDTQhZQ3-q9BI_ExPcHs_qm63eRalphIvrkrd6kHU2sUc8MRGNlGD4OtTsbp6g-H9v18zg157e5MQxIYOkHOzKCEustzRpwatGkOf87DNvH6WjiKFHzR1ETOEfVoBK52WLvrGfegcrWrSDm1607g6=w864-h668-no?authuser=0" width="70%"  alt="Demo">
 
 ## Installation
 
