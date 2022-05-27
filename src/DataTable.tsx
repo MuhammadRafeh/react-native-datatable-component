@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import DataTableRow from 'react-native-datatable-component/src/DataTableRow';
-import DataTableFooter from 'react-native-datatable-component/src/DataTableFooter';
-import DataTableHeader from 'react-native-datatable-component/src/DataTableHeader';
-import Line from 'react-native-datatable-component/src/Line';
-import sortData from 'react-native-datatable-component/functions/sort';
-import showCurrentProgress from 'react-native-datatable-component/functions/showCurrentProgress';
+import DataTableRow from './DataTableRow';
+import DataTableFooter from './DataTableFooter';
+import DataTableHeader from './DataTableHeader';
+import Line from './Line';
+import sortData from '../functions/sort';
+import showCurrentProgress from '../functions/showCurrentProgress';
 
 export const COL_TYPES = {
     INT: 'INT',
