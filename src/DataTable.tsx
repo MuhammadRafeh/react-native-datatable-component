@@ -27,7 +27,7 @@ interface PropTypes {
 
 class DataTable extends React.Component<PropTypes> {
     state = {
-        dataPropSnap: null,
+        snap: null,
         data: [], //[{...}, {...}, ....]
         displayData: [], //currentlyDisplayData
         colNames: [],//['ad', 'asd', ...]
@@ -116,8 +116,16 @@ class DataTable extends React.Component<PropTypes> {
     }
 
     static getDerivedStateFromProps(props, currentState) {
-        //this called on every setState() & on mount & on prop changes
-        if (JSON.stringify(props.data) === JSON.stringify(currentState.dataPropSnap)) return null;
+        //this func() called on every setState() & on mount & on prop changes
+        const snap = JSON.stringify({
+            data: props.data,
+            colSettings: props.colSettings,
+            colNames: props.colNames,
+            noOfPages: props.noOfPages
+        })
+
+        if (snap == currentState.snap) return null;
+
         //Here below code means that data prop is changed
         let data = props?.data
         let colNames = props?.colNames;
@@ -157,7 +165,7 @@ class DataTable extends React.Component<PropTypes> {
             return row;
         })
         return {
-            dataPropSnap: props?.data,
+            snap: snap,
             data: modifiedData,
             displayData: modifiedData.slice(0, end[0]?.endData),
             colNames: [...colNames],
