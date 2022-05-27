@@ -23,6 +23,7 @@ interface PropTypes {
     onRowSelect?: (anyVariable) => object;
     backgroundColor?: string;
     doSort?: boolean;
+    headerLabelStyle?: object;
 }
 
 class DataTable extends React.Component<PropTypes> {
@@ -194,6 +195,7 @@ class DataTable extends React.Component<PropTypes> {
                     eachColWidth={this.state.eachColWidth}
                     handleColPress={this.handleColPress}
                     doSort={this.props?.doSort}
+                    style={this.props?.headerLabelStyle}
                 />
 
                 <Line width={this.state.widthOfContainer} header />

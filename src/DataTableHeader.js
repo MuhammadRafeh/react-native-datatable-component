@@ -6,7 +6,7 @@ const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort, eachColWidth } = props;
+    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort, eachColWidth, style } = props;
 
     const isDoSort = doSort == false ? false : true;
 
@@ -29,7 +29,7 @@ const DataTableHeader = React.memo((props) => {
                     if (colType == COL_TYPES.CHECK_BOX) {
                         return (
                             <View key={index} style={[styles.headerRow, { width: colWidth, justifyContent }]}>
-                                <Text style={[styles.headerLabel, { textAlign: 'center' }]} adjustsFontSizeToFit={true} numberOfLines={20}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
+                                <Text style={[styles.headerLabel, { textAlign: 'center' }, style]} adjustsFontSizeToFit={true} numberOfLines={20}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
                             </View>
                         )
                     }
@@ -43,7 +43,7 @@ const DataTableHeader = React.memo((props) => {
                                     <Text
                                         adjustsFontSizeToFit={true}
                                         numberOfLines={20}
-                                        style={[styles.headerLabel]}>
+                                        style={[styles.headerLabel, style]}>
                                         {' ' + colName[0].toUpperCase() + colName.substring(1)}
                                     </Text>
                                 </View>
@@ -53,7 +53,7 @@ const DataTableHeader = React.memo((props) => {
                         const isLeft = paddingLeft == 1 ? false : true;
                         return (
                             <View style={{ width: colWidth, paddingTop: PADDING_TOP, paddingBottom: 18 }} key={index}>
-                                <Text style={{ ...styles.headerLabel, paddingLeft, paddingRight, textAlign: isLeft ? 'left' : 'right', left: isLeft ? -0.5 : undefined }}
+                                <Text style={{ ...styles.headerLabel, paddingLeft, paddingRight, textAlign: isLeft ? 'left' : 'right', left: isLeft ? -0.5 : undefined, ...style }}
                                     adjustsFontSizeToFit={true}
                                     numberOfLines={20}
                                 >
