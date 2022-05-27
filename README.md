@@ -53,7 +53,11 @@ const SomeComponent = props => {
                 { name: 'Muhammad Moiz', age: 13, gender: 'male' }
             ]} // list of objects
             colNames={['name', 'age', 'gender']} //List of Strings
-            colSettings={[{ name: 'name', type: COL_TYPES.STRING }, { name: 'age', type: COL_TYPES.INT }, {name: 'gender', type: COL_TYPES.STRING}]}//List of Objects
+            colSettings={[
+              { name: 'name', type: COL_TYPES.STRING, width: '40%' }, 
+              { name: 'age', type: COL_TYPES.INT, width: '30%' }, 
+              {name: 'gender', type: COL_TYPES.STRING, width: '30%'}
+            ]}//List of Objects
             noOfPages={2} //number
             backgroundColor={'rgba(23,2,4,0.2)'} //Table Background Color
         />
@@ -143,7 +147,7 @@ Data must be List of Objects where each object will represent a Row Object's Key
 
 1. doHighlight
 
-*If you want to highlight Any Row then use this*
+*If you want to highlight Any Row then do this*
 
 ```js
   
@@ -179,7 +183,8 @@ Below is the shape of Objects.
 //Object Shape
 {
       name: 'name Of Column Here', // String will be the Column Name
-      type: COL_TYPES.STRING / COL_TYPES.CHECK_BOX, // INT || STRING
+      type: COL_TYPES.STRING | COL_TYPES.CHECK_BOX | COL_TYPES.INT, // INT || STRING
+      width: '40%' // This is the width, column will take out of 100%
 }
         
 ```
