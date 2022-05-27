@@ -60,6 +60,7 @@ const SomeComponent = props => {
             ]}//List of Objects
             noOfPages={2} //number
             backgroundColor={'rgba(23,2,4,0.2)'} //Table Background Color
+            headerLabelStyle={{ color: 'grey', fontSize: 12 }} //Text Style Works
         />
     );
 }
@@ -109,6 +110,7 @@ noOfPages | Number | 2 | No
 onRowSelect | Func | - | No
 backgroundColor | string, rgba, hex | '#e4edec' | No
 doSort | boolean | true | No
+headerLabelStyle | {} of Text Style | - | No
 
 ## Constants
 
