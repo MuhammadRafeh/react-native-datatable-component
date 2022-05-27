@@ -1,14 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { COL_TYPES } from './DataTable';
 import Line from './Line';
 import CheckBox from './CheckBox';
-const { width, height } = Dimensions.get('window');
 
 const DataTableRow = React.memo((props) => {
 
     //data is object
-    const { data, colNames, style, mapColNameToType, widthOfLine, handleOnRowSelect } = props;
+    const { data, colNames, defaultEachColumnWidth, mapColNameToType, widthOfLine, handleOnRowSelect, eachColWidth } = props;
 
     let color = 'black';
     let backgroundColor = 'transparent';
@@ -25,6 +24,8 @@ const DataTableRow = React.memo((props) => {
             <View style={[styles.rowContainer, { backgroundColor }]}>
                 {
                     colNames.map((name, index) => {
+                        const colWidth = eachColWidth[name] == undefined ? defaultEachColumnWidth : eachColWidth[name];
+
                         const colType = mapColNameToType[name]
                         const textAlign = (colType == COL_TYPES.STRING || colType == null) ? 'left' : (colType == COL_TYPES.CHECK_BOX || colType == COL_TYPES.RADIO) ? 'center' : 'right'
                         let paddingLeft = 0;
@@ -38,23 +39,19 @@ const DataTableRow = React.memo((props) => {
 
                         }
 
-                        // const handleOnCheckPress = (isChecked) => {
-                            // handleOnRowSelect(isChecked, data.id, name)
-                        // }
-                        // console.log(data[name])
                         return (
-                            <View key={index} style={[styles.rowCellContainer, { width: style.defaultEachColumnWidth }]}>
+                            <View key={index} style={[styles.rowCellContainer, { width: colWidth }]}>
                                 {
                                     textAlign == 'center' ? (
-                                        <View style={{width: '100%', height: 20, alignItems: 'center', justifyContent: 'center'}}>
-                                            <CheckBox info={{name, id: data.id}} handleOnRowSelect={handleOnRowSelect} initialVal={data[name] == true ? true: false}/> 
+                                        <View style={{ width: '100%', height: 20, alignItems: 'center', justifyContent: 'center' }}>
+                                            <CheckBox info={{ name, id: data.id }} handleOnRowSelect={handleOnRowSelect} initialVal={data[name] == true ? true : false} />
                                         </View>
-                                    ): (
+                                    ) : (
                                         <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign, color }]}>{data[name]}</Text>
                                     )
                                 }
                             </View>
-                            
+
                         );
                     })
                 }

@@ -6,7 +6,7 @@ const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort } = props;
+    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort, eachColWidth } = props;
 
     const isDoSort = doSort == false ? false : true;
 
@@ -14,6 +14,8 @@ const DataTableHeader = React.memo((props) => {
         <View style={styles.headerContainer}>
             {
                 colNames.map((colName, index) => {
+                    const colWidth = eachColWidth[colName] == undefined ? defaultEachColumnWidth : eachColWidth[colName];
+                    console.log(colWidth)
                     const colType = mapColNameToType[colName]
                     const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.CHECK_BOX || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
                     let paddingLeft = 0;
@@ -27,14 +29,14 @@ const DataTableHeader = React.memo((props) => {
                     }
                     if (colType == COL_TYPES.CHECK_BOX) {
                         return (
-                            <View key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, justifyContent }]}>
+                            <View key={index} style={[styles.headerRow, { width: colWidth, justifyContent }]}>
                                 <Text style={[styles.headerLabel, { textAlign: 'center' }]} adjustsFontSizeToFit={true} numberOfLines={20}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
                             </View>
                         )
                     }
                     if (isDoSort) {
                         return (
-                            <TouchableOpacity key={index} style={[styles.headerRow, { width: defaultEachColumnWidth, paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
+                            <TouchableOpacity key={index} style={[styles.headerRow, { width: colWidth, paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
                                 <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: 8 }}>
                                     <Image source={require('../assets/doubleArrow.png')} />
                                 </View>
@@ -51,7 +53,7 @@ const DataTableHeader = React.memo((props) => {
                     } else {
                         const isLeft = paddingLeft == 1 ? false : true;
                         return (
-                            <View style={{ width: defaultEachColumnWidth, paddingTop: PADDING_TOP, paddingBottom: 18 }} key={index}>
+                            <View style={{ width: colWidth, paddingTop: PADDING_TOP, paddingBottom: 18 }} key={index}>
                                 <Text style={{ ...styles.headerLabel, paddingLeft, paddingRight, textAlign: isLeft ? 'left' : 'right', left: isLeft ? -0.5 : undefined }}
                                     adjustsFontSizeToFit={true}
                                     numberOfLines={20}
