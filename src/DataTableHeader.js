@@ -15,7 +15,6 @@ const DataTableHeader = React.memo((props) => {
             {
                 colNames.map((colName, index) => {
                     const colWidth = eachColWidth[colName] == undefined ? defaultEachColumnWidth : eachColWidth[colName];
-                    console.log(colWidth)
                     const colType = mapColNameToType[colName]
                     const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.CHECK_BOX || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
                     let paddingLeft = 0;

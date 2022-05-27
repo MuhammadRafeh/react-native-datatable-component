@@ -25,7 +25,6 @@ const DataTableRow = React.memo((props) => {
                 {
                     colNames.map((name, index) => {
                         const colWidth = eachColWidth[name] == undefined ? defaultEachColumnWidth : eachColWidth[name];
-
                         const colType = mapColNameToType[name]
                         const textAlign = (colType == COL_TYPES.STRING || colType == null) ? 'left' : (colType == COL_TYPES.CHECK_BOX || colType == COL_TYPES.RADIO) ? 'center' : 'right'
                         let paddingLeft = 0;
