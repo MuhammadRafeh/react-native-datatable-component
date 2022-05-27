@@ -54,17 +54,11 @@ const styles = StyleSheet.create({
         height: LAST_ROW_HEIGHT,
         paddingHorizontal: 10,
     },
-    greaterThan: {
-        paddingRight: 7,
-        paddingLeft: 14.5,
-        justifyContent: 'center',
-        height: '100%',
-    },
     lessThan: {
         paddingLeft: 14.5,
         paddingRight: 14.5,
         justifyContent: 'center',
-        height: '100%',
+        height: '100%'
     },
     noOfPages: {
         paddingLeft: 14.5,
@@ -76,6 +70,6 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     iconStyle: {
-        height: LAST_ROW_HEIGHT / 2
+        flex: 1
     }
 });
