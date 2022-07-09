@@ -16,7 +16,6 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org
-      - run: npm ci
       - run: git config --global user.name "muhammadrafeh"
       - run: git config --global user.email "muhammadrafehatique@gmail.com"
       - run: npm version ${{ github.event.release.tag_name }}
