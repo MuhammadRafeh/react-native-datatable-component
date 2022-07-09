@@ -16,7 +16,11 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: git config --global user.name "muhammadrafeh"
       - run: git config --global user.email "muhammadrafehatique@gmail.com"
-      - run: npm version ${{ github.event.release.tag_name }}
+      - name: "change npm version"
+        uses: reedyuk/npm-version@1.1.1
+        with:
+          version: ${{ github.event.release.tag_name }}
+          git-tag-version: "true"
       - name: 🚀 publish
         run: npm publish
         env:
