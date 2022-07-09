@@ -10,6 +10,7 @@ jobs:
     name: 🚀 release
     runs-on: ubuntu-latest
     steps:
+      - run: echo "${{ toJson(${{ github.event) }}"
       - name: 📚 checkout
         uses: actions/checkout@v2
       - name: 🟢 node
