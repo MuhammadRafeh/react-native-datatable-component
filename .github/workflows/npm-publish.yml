@@ -24,6 +24,6 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git push
+      - run: git push origin HEAD:main
         env:
           github-token: ${{ secrets.GITHUB_TOKEN }}
