@@ -1,9 +1,8 @@
 name: "🚀 release"
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   release:
@@ -17,7 +16,14 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: git config --global user.name "muhammadrafeh"
+      - run: git config --global user.email "muhammadrafehatique@gmail.com"
+      - run: npm version ${{ github.event.release.tag_name }}
       - name: 🚀 publish
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: git push
+        env:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
