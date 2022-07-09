@@ -1,11 +1,11 @@
-name: Publishint To NPM
+name: Publishing To NPM
 
 on:
   release:
     types: [published]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
