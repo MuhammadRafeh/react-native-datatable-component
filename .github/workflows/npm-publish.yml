@@ -19,15 +19,11 @@ jobs:
       - run: git config --global user.name "muhammadrafeh"
       - run: git config --global user.email "muhammadrafehatique@gmail.com"
 
-      - run: npm version ${{ github.event.release.tag_name }}
+      - run: npm version patch
 
-      # publish to NPM -> there is one caveat, continue reading for the fix
       - run: npm publish
         env:
-          # Use a token to publish to NPM. See below for how to set it up
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      # push the version changes to GitHub
       - run: git push
         env:
-          # The secret is passed automatically. Nothing to configure.
           github-token: ${{ secrets.GITHUB_TOKEN }}
