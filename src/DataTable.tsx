@@ -13,7 +13,7 @@ export const COL_TYPES = {
     CHECK_BOX: 'CHECK_BOX'
 }
 
-const TOTAL_WIDTH = 100; '100%'
+const TOTAL_WIDTH = 100;
 
 interface PropTypes {
     data?: object[];
