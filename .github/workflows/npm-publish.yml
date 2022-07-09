@@ -19,7 +19,7 @@ jobs:
       - run: git config --global user.name "muhammadrafeh"
       - run: git config --global user.email "muhammadrafehatique@gmail.com"
 
-      - run: npm version patch
+      - run: npm version ${{ github.event.release.tag_name }}
 
       - run: npm publish
         env:
