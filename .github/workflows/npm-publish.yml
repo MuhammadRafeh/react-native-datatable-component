@@ -1,33 +1,33 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
-
-name: Node.js Package
+name: Publishint To NPM
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm ci
-      - run: npm test
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: git config --global user.name "muhammadrafeh"
+      - run: git config --global user.email "muhammadrafehatique@gmail.com"
+
+      - run: npm version ${{ github.event.release.tag_name }}
+
+      # publish to NPM -> there is one caveat, continue reading for the fix
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          # Use a token to publish to NPM. See below for how to set it up
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # push the version changes to GitHub
+      - run: git push
+        env:
+          # The secret is passed automatically. Nothing to configure.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
