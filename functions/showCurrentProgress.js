@@ -10,7 +10,6 @@ const showCurrentProgress = (numOfPages = 2, fullLengthOfData) => { //default is
     let noOfDataPerDisplay = fullLengthOfData / numOfPages;
 
     if (Math.floor(noOfDataPerDisplay) < 1) {//it's mean data length is smaller than no Of Pages;
-        console.log('as')
         numOfPages = 1;
         noOfDataPerDisplay = fullLengthOfData; //fullLengthOfData / 1
     }
@@ -21,7 +20,6 @@ const showCurrentProgress = (numOfPages = 2, fullLengthOfData) => { //default is
     const ceilData = Math.ceil(noOfDataPerDisplay)
     if (floorData !== ceilData || floorData === ceilData) { //It's mean data is not equally distributed Among numOfPages
         let number = 0;
-        // console.log("floor", floorData,"ceil", ceilData)
         for (let i = 0; i < numOfPages; i++) {
             let isCeilWasAdded = false;
             if ((numOfPages - 1) != i) { //It's mean it's not the last Loop
