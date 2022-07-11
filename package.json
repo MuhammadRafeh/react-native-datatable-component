@@ -19,6 +19,14 @@
     "react-native-table",
     "react native table"
   ],
+  "files": [
+    "assets",
+    "functions",
+    "src",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "author": "Muhammad Rafeh <muhammadrafehatique@outlook.com>",
   "license": "Apache-2.0",
   "bugs": {
