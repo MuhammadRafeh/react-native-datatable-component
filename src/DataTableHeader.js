@@ -6,12 +6,12 @@ const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort, eachColWidth, style } = props;
+    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort, backgroundColor, eachColWidth, style } = props;
 
     const isDoSort = doSort == false ? false : true;
 
     return (
-        <View style={styles.headerContainer}>
+        <View style={[styles.headerContainer, {backgroundColor: backgroundColor}]}>
             {
                 colNames.map((colName, index) => {
                     const colWidth = eachColWidth[colName] == undefined ? defaultEachColumnWidth : eachColWidth[colName];
@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 10,
         alignItems: 'center',
+        borderBottomWidth: 0.4,
+        borderBottomColor: 'grey',
     },
     headerRow: {
         paddingTop: PADDING_TOP,

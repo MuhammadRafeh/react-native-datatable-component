@@ -110,6 +110,7 @@ noOfPages | Number | 2 | No
 onRowSelect | Func | - | No
 backgroundColor | string, rgba, hex | '#e4edec' | No
 doSort | boolean | true | No
+stickyHeader | boolean | true | No
 headerLabelStyle | {} of Text Style | - | No
 
 ## Constants

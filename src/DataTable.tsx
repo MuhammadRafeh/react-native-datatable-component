@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import {View, ScrollView} from 'react-native';
 import DataTableRow from './DataTableRow';
 import DataTableFooter from './DataTableFooter';
 import DataTableHeader from './DataTableHeader';
-import Line from './Line';
 import sortData from '../functions/sort';
 import showCurrentProgress from '../functions/showCurrentProgress';
 
@@ -23,6 +22,7 @@ interface PropTypes {
     onRowSelect?: (anyVariable) => object;
     backgroundColor?: string;
     doSort?: boolean;
+    stickyHeader?: boolean;
     headerLabelStyle?: object;
 }
 
@@ -40,7 +40,7 @@ class DataTable extends React.Component<PropTypes> {
         endDataArray: [], //[{id, endData}]
         noOfPages: 3, //default
         activeDisplayDataId: 0,
-        mapColNameToType: {}
+        mapColNameToType: {},
     }
 
 
@@ -122,7 +122,7 @@ class DataTable extends React.Component<PropTypes> {
             data: props.data,
             colSettings: props.colSettings,
             colNames: props.colNames,
-            noOfPages: props.noOfPages
+            noOfPages: props.noOfPages,
         })
 
         if (snap == currentState.snap) return null;
@@ -180,41 +180,49 @@ class DataTable extends React.Component<PropTypes> {
         };
     }
 
-    render() {
-
+    renderItem = (item, index) => {
         return (
-            <View style={{ backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#e4edec' }}
-                onLayout={e => {
-                    this.setState({ widthOfContainer: e.nativeEvent.layout.width })
-                }}>
+            <DataTableRow
+                handleOnRowSelect={this.handleOnRowSelect}
+                key={index}
+                index={index}
+                data={item}
+                mapColNameToType={this.state.mapColNameToType}
+                colNames={this.state.colNames}
+                eachColWidth={this.state.eachColWidth}
+                defaultEachColumnWidth={this.state.defaultEachColumnWidth}
+            />
+        );
+    }
 
-                <DataTableHeader
-                    colNames={this.state.colNames}
-                    mapColNameToType={this.state.mapColNameToType}
-                    defaultEachColumnWidth={this.state.defaultEachColumnWidth}
-                    eachColWidth={this.state.eachColWidth}
-                    handleColPress={this.handleColPress}
-                    doSort={this.props?.doSort}
-                    style={this.props?.headerLabelStyle}
-                />
-
-                <Line width={this.state.widthOfContainer} header />
-                <ScrollView>
-                    {
-                        this.state.displayData.map((item, index) => (
-                            <DataTableRow
-                                handleOnRowSelect={this.handleOnRowSelect}
-                                widthOfLine={this.state.widthOfContainer}
-                                key={index}
-                                index={index}
-                                data={item}
-                                mapColNameToType={this.state.mapColNameToType}
-                                colNames={this.state.colNames}
-                                eachColWidth={this.state.eachColWidth}
-                                defaultEachColumnWidth={this.state.defaultEachColumnWidth}
-                            />
-                        ))
-                    }
+    render() {
+        return (
+            <View
+                onLayout={e => this.setState({ widthOfContainer: e.nativeEvent.layout.width })}
+                style={{flex: 1, backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#e4edec'}}>
+                <ScrollView
+                    nestedScrollEnabled={true}
+                    bounces={false}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}>
+                    <ScrollView
+                        bounces={false}
+                        showsVerticalScrollIndicator={false}
+                        stickyHeaderIndices={this.props?.stickyHeader === false ? [] : [0]}>
+                        <DataTableHeader
+                            colNames={this.state.colNames}
+                            mapColNameToType={this.state.mapColNameToType}
+                            defaultEachColumnWidth={this.state.defaultEachColumnWidth}
+                            eachColWidth={this.state.eachColWidth}
+                            handleColPress={this.handleColPress}
+                            doSort={this.props?.doSort}
+                            style={this.props?.headerLabelStyle}
+                            backgroundColor={this.props.backgroundColor ? this.props.backgroundColor : '#e4edec'}
+                        />
+                        {this.state.displayData.map((item, index) => {
+                            return this.renderItem(item, index);
+                        })}
+                    </ScrollView>
                 </ScrollView>
                 <DataTableFooter
                     start={this.state.startDataArray}
@@ -223,7 +231,6 @@ class DataTable extends React.Component<PropTypes> {
                     dataLength={this.state.data.length}
                     handleNextPreviousPagePress={this.handleNextPreviousPagePress}
                 />
-
             </View>
         );
     }
