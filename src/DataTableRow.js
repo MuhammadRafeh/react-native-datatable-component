@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { COL_TYPES } from './DataTable';
-import Line from './Line';
 import CheckBox from './CheckBox';
 
 const DataTableRow = React.memo((props) => {
 
     //data is object
-    const { data, colNames, defaultEachColumnWidth, mapColNameToType, widthOfLine, handleOnRowSelect, eachColWidth } = props;
+    const { data, colNames, defaultEachColumnWidth, mapColNameToType, handleOnRowSelect, eachColWidth } = props;
 
     let color = 'black';
     let backgroundColor = 'transparent';
@@ -20,7 +19,6 @@ const DataTableRow = React.memo((props) => {
     }
     return (
         <>
-
             <View style={[styles.rowContainer, { backgroundColor }]}>
                 {
                     colNames.map((name, index) => {
@@ -55,9 +53,6 @@ const DataTableRow = React.memo((props) => {
                     })
                 }
             </View>
-
-            <Line row width={widthOfLine} />
-
         </>
     );
 })
@@ -68,7 +63,9 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         backgroundColor: 'green',
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        borderBottomWidth: 0.4,
+        borderBottomColor: '#e3e3e3',
     },
     rowCellText: {
         color: 'black',
